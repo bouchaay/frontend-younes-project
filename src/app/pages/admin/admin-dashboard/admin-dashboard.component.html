@@ -1,15 +1,18 @@
 <section class="admin-dashboard">
+  <button class="burger-menu" (click)="toggleSidebar()">☰</button>
+
   <div class="admin-container">
-    <!-- Barre latérale -->
-    <!-- 📌 Barre latérale -->
-    <nav class="sidebar">
+    <!-- Sidebar -->
+    <nav class="sidebar" [class.closed]="!isSidebarOpen">
+      <div class="logo">
+        <img src="assets/images/logo-yy.png" alt="Logo" />
+      </div>
       <ul>
-        <li><a (click)="goToUsers()">👥 Gestion Utilisateurs</a></li>
-        <li><a (click)="goToAppointments()">📅 Rendez-vous</a></li>
-        <li><a (click)="goToChangePassword()">🔑 Changer Mot de Passe</a></li> <!-- ✅ Ajout du lien -->
+        <li><a (click)="goToUsers()">Gestion Utilisateurs</a></li>
+        <li><a (click)="goToAppointments()">Rendez-vous</a></li>
+        <li><a (click)="goToChangePassword()">Changer Mot de Passe</a></li>
       </ul>
     </nav>
-
 
     <!-- Contenu principal -->
     <div class="admin-content">

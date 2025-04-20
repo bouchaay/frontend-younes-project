@@ -18,7 +18,6 @@
       </ul>
     } @else {
       <div class="user-info">
-        <p>Bienvenue dans votre espace {{ typeEspace }}</p>
         @if (!isInAdminPage && isAdmin) {
           <p><a routerLink="/admin">Accéder à l'administration</a></p>
         } @else if (!isInClientPage && isClient) {

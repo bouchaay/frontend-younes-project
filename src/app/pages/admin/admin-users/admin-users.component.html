@@ -13,12 +13,14 @@
                 <option value="actif">Actif</option>
                 <option value="bloqué">Bloqué</option>
             </select>
+            <div class="hide-on-mobile">
+                <label for="clientSortBy">Trier par :</label>
+                <select id="clientSortBy" [(ngModel)]="clientSortBy">
+                    <option value="date">Date de création</option>
+                    <option value="appointments">Rendez-vous terminés</option>
+                </select>
+            </div>
 
-            <label for="clientSortBy">Trier par :</label>
-            <select id="clientSortBy" [(ngModel)]="clientSortBy">
-                <option value="date">Date de création</option>
-                <option value="appointments">Rendez-vous terminés</option>
-            </select>
         </div>
 
         <!-- Tableau Clients -->
@@ -44,11 +46,11 @@
                 } @else {
                 @for (user of paginatedClients; track user.id) {
                 <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone }}</td>
-                    <td>
+                    <td class="hide-on-mobile">{{ user.id }}</td>
+                    <td data-label="Nom">{{ user.name }}</td>
+                    <td data-label="Email">{{ user.email }}</td>
+                    <td data-label="Téléphone">{{ user.phone }}</td>
+                    <td data-label="Statut">
                         @if (editingUserId === user.id) {
                         <select [(ngModel)]="editedStatus">
                             <option value="actif">Actif</option>
@@ -58,10 +60,10 @@
                         {{ user.status | titlecase}}
                         }
                     </td>
-                    <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
-                    <td>{{ user.completedAppointments }}</td>
-                    <td>{{ user.canceledAppointments }}</td>
-                    <td>
+                    <td class="hide-on-mobile">{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+                    <td class="hide-on-mobile">{{ user.completedAppointments }}</td>
+                    <td class="hide-on-mobile">{{ user.canceledAppointments }}</td>
+                    <td class="hide-on-mobile">
                         <div class="actions">
                             @if (editingUserId === user.id) {
                             <button class="save-btn" (click)="saveUserStatus(user)">
@@ -162,11 +164,13 @@
                 <option value="en congé">En Congé</option>
             </select>
 
-            <label for="employeeSortBy">Trier par :</label>
-            <select id="employeeSortBy" [(ngModel)]="employeeSortBy">
-                <option value="date">Date de création</option>
-                <option value="appointments">Rendez-vous terminés</option>
-            </select>
+            <div class="hide-on-mobile">
+                <label for="employeeSortBy">Trier par :</label>
+                <select id="employeeSortBy" [(ngModel)]="employeeSortBy">
+                    <option value="date">Date de création</option>
+                    <option value="appointments">Rendez-vous terminés</option>
+                </select>
+            </div>
         </div>
 
         <!-- Tableau Employés -->
@@ -192,11 +196,11 @@
                 } @else {
                 @for (user of paginatedEmployees; track user.id) {
                 <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone }}</td>
-                    <td>
+                    <td class="hide-on-mobile">{{ user.id }}</td>
+                    <td data-label="Nom">{{ user.name }}</td>
+                    <td data-label="Email">{{ user.email }}</td>
+                    <td data-label="Téléphone">{{ user.phone }}</td>
+                    <td data-label="Statut">
                         @if (editingUserId === user.id) {
                         <select [(ngModel)]="editedStatus">
                             <option value="actif">Actif</option>
@@ -207,10 +211,10 @@
                         {{ user.status | titlecase}}
                         }
                     </td>
-                    <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
-                    <td>{{ user.completedAppointments }}</td>
-                    <td>{{ user.canceledAppointments }}</td>
-                    <td>
+                    <td class="hide-on-mobile">{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+                    <td class="hide-on-mobile">{{ user.completedAppointments }}</td>
+                    <td class="hide-on-mobile">{{ user.canceledAppointments }}</td>
+                    <td class="hide-on-mobile">
                         <div class="actions">
                             @if (editingUserId === user.id) {
                             <button class="save-btn" (click)="saveUserStatus(user)">

@@ -56,19 +56,19 @@
                 } @else {
                 @for (appointment of paginatedAppointments; track appointment.id) {
                 <tr>
-                    <td>{{ appointment.id }}</td>
-                    <td>{{ appointment.clientName }}</td>
-                    <td>{{ appointment.employeeName }}</td>
-                    <td>{{ appointment.service }}</td>
-                    <td>{{ appointment.date | date: 'dd/MM/yyyy' }}</td>
-                    <td>{{ appointment.time }}</td>
-                    <td>{{ appointment.dateCreation ? (appointment.dateCreation | date: 'dd/MM/yyyy') : '' }}</td>
-                    <td>{{ appointment.dateAnnulation ? (appointment.dateAnnulation | date: 'dd/MM/yyyy') : '' }}
+                    <td class="hide-on-mobile">{{ appointment.id }}</td>
+                    <td data-label="Nom Client">{{ appointment.clientName }}</td>
+                    <td class="hide-on-mobile">{{ appointment.employeeName }}</td>
+                    <td data-label="Service">{{ appointment.service }}</td>
+                    <td data-label="Date">{{ appointment.date | date: 'dd/MM/yyyy' }}</td>
+                    <td data-label="Heure">{{ appointment.time }}</td>
+                    <td class="hide-on-mobile">{{ appointment.dateCreation ? (appointment.dateCreation | date: 'dd/MM/yyyy') : '' }}</td>
+                    <td class="hide-on-mobile">{{ appointment.dateAnnulation ? (appointment.dateAnnulation | date: 'dd/MM/yyyy') : '' }}
                     </td>
-                    <td>{{ appointment.dateTerminaison ? (appointment.dateTerminaison | date: 'dd/MM/yyyy') : ''
+                    <td class="hide-on-mobile">{{ appointment.dateTerminaison ? (appointment.dateTerminaison | date: 'dd/MM/yyyy') : ''
                         }}</td>
 
-                    <td>
+                    <td data-label="Statut">
                         @if (editingAppointmentId === appointment.id) {
                         <select [(ngModel)]="editedStatus">
                             <option value="En attente">En attente</option>
@@ -87,7 +87,7 @@
                             <button class="cancel-btn" (click)="cancelEdit()">❌</button>
                             } @else {
                             <button class="edit-btn" (click)="editAppointment(appointment)">⚙</button>
-                            <button class="delete-btn" (click)="deleteAppointment(appointment.id)">🗑</button>
+                            <button class="delete-btn hide-on-mobile" (click)="deleteAppointment(appointment.id)">🗑</button>
                             }
                         </div>
                     </td>

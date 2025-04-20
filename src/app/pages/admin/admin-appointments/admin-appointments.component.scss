@@ -426,5 +426,81 @@ td select {
   }
 }
 
+@media screen and (max-width: 1180px) {
+  .appointments-management {
+    .hide-on-mobile {
+      display: none !important;
+    }
 
-  
+    table {
+      font-size: 0.9rem;
+    }
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+
+      tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border: none;
+        text-align: left;
+
+        &::before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: #555;
+          flex-basis: 50%;
+          margin-right: 10px;
+        }
+
+        // ⚠️ S'assurer que hide-on-mobile marche même dans td
+        &.hide-on-mobile {
+          display: none !important;
+        }
+      }
+    }
+
+    .actions {
+      flex-direction: column;
+      gap: 6px;
+
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      // 👇 Ce qui permet de cacher le bouton delete
+      .delete-btn.hide-on-mobile {
+        display: none !important;
+      }
+    }
+
+    .pagination {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .add-appointment-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      margin-top: 15px;
+    }
+  }
+}

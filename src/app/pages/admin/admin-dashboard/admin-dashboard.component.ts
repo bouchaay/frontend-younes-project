@@ -17,7 +17,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   goToUsers() {
-    if(!this.authService.autoLogoutIfExpired()) {
+    if (!this.authService.autoLogoutIfExpired()) {
       this.router.navigateByUrl('/admin/users');
     }
   }
@@ -31,6 +31,14 @@ export class AdminDashboardComponent implements OnInit {
   goToChangePassword() {
     if (!this.authService.autoLogoutIfExpired()) {
       this.router.navigateByUrl('/admin/change-password');
+    }
+  }
+
+  isSidebarOpen: boolean = true;
+
+  toggleSidebar() {
+    if (!this.authService.autoLogoutIfExpired()) {
+      this.isSidebarOpen = !this.isSidebarOpen;
     }
   }
 }
