@@ -1,0 +1,56 @@
+.mentions-legales {
+    background: #f9f9f9;
+    padding: 60px 20px;
+    font-family: 'Segoe UI', sans-serif;
+  
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+  
+    h1 {
+      font-size: 2.5rem;
+      color: #b8860b;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  
+    .section {
+      margin-bottom: 30px;
+  
+      h2 {
+        font-size: 1.4rem;
+        color: #222;
+        margin-bottom: 10px;
+      }
+  
+      p {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+        margin: 6px 0;
+      }
+  
+      a {
+        color: #b8860b;
+        text-decoration: underline;
+  
+        &:hover {
+          color: #8b6508;
+        }
+      }
+    }
+  
+    .update-date {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #888;
+      font-style: italic;
+      text-align: center;
+    }
+  }
+  

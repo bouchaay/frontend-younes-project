@@ -1,0 +1,13 @@
+@if(isLoading) {
+  <div class="global-spinner-overlay">
+    <div class="spinner"></div>
+  </div>
+}
+
+<app-navbar />
+
+<main [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</main>
+
+<app-footer />

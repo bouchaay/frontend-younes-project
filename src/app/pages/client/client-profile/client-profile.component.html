@@ -1,0 +1,32 @@
+<section class="client-profile">
+    <div class="container">
+      <h2>MES INFOS PERSO</h2>
+  
+      <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+        <div class="form-group">
+          <label>Nom</label>
+          <input formControlName="lastName" type="text" [placeholder]="lastName || 'Votre nom'">
+        </div>
+      
+        <div class="form-group">
+          <label>Prénom</label>
+          <input formControlName="firstName" type="text" [placeholder]="firstName || 'Votre prénom'">
+        </div>
+      
+        <div class="form-group">
+          <label>Email</label>
+          <input formControlName="email" type="email" [placeholder]="currentUser?.email || 'Votre email'">
+        </div>
+      
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input formControlName="phone" type="text" [placeholder]="currentUser?.phone || 'Votre numéro'">
+        </div>
+      
+        <button type="submit" class="btn-save">Sauvegarder</button>
+      </form>      
+      <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    </div>
+  </section>
+  

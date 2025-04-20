@@ -1,0 +1,18 @@
+<section class="employee-dashboard">
+    <div class="employee-container">
+      <!-- 📌 Barre latérale -->
+      <nav class="sidebar">
+        <ul>
+          <li><a (click)="goToDashboard()">📅 Tableau de bord</a></li>
+          <li><a (click)="goToDisponibilites()">🕐 Saisir vos disponibilités</a></li>
+          <li><a (click)="goToChangePassword()">🔐 Changer le mot de passe</a></li>
+        </ul>
+      </nav>
+  
+      <!-- 📦 Contenu principal -->
+      <div class="employee-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </section>
+  

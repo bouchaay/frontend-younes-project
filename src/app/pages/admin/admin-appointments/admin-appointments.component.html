@@ -1,0 +1,174 @@
+<section class="appointments-management">
+    <div class="container">
+        <h2>📅 Gestion des rendez-vous</h2>
+
+        <!-- 🔍 Filtres -->
+        <div class="filters">
+            <!-- Filtre par employé -->
+            <label for="employeeFilter">Filtrer par employé :</label>
+            <select id="employeeFilter" [(ngModel)]="employeeFilter">
+                <option value="all">Tous</option>
+                @for (employee of uniqueEmployees; track employee) {
+                <option [value]="employee">{{ employee }}</option>
+                }
+            </select>
+
+            <!-- Filtre par date -->
+            <label for="startDate">Date de :</label>
+            <input type="date" id="startDate" [(ngModel)]="startDate">
+
+            <label for="endDate">à :</label>
+            <input type="date" id="endDate" [(ngModel)]="endDate">
+
+            <!-- Filtre par statut -->
+            <label for="statusFilter">Filtrer par statut :</label>
+            <select id="statusFilter" [(ngModel)]="statusFilter">
+                <option value="all">Tous</option>
+                <option value="En attente">En attente</option>
+                <option value="Confirmé">Confirmé</option>
+                <option value="Terminé">Terminé</option>
+                <option value="Annulé">Annulé</option>
+            </select>
+        </div>
+
+        <!-- 📋 Tableau des rendez-vous -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Employé</th>
+                    <th>Service</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Date Création</th>
+                    <th>Date Annulation</th>
+                    <th>Date Terminaison</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (paginatedAppointments.length === 0) {
+                <tr>
+                    <td colspan="8" class="no-data">Aucun rendez-vous trouvé.</td>
+                </tr>
+                } @else {
+                @for (appointment of paginatedAppointments; track appointment.id) {
+                <tr>
+                    <td>{{ appointment.id }}</td>
+                    <td>{{ appointment.clientName }}</td>
+                    <td>{{ appointment.employeeName }}</td>
+                    <td>{{ appointment.service }}</td>
+                    <td>{{ appointment.date | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ appointment.time }}</td>
+                    <td>{{ appointment.dateCreation ? (appointment.dateCreation | date: 'dd/MM/yyyy') : '' }}</td>
+                    <td>{{ appointment.dateAnnulation ? (appointment.dateAnnulation | date: 'dd/MM/yyyy') : '' }}
+                    </td>
+                    <td>{{ appointment.dateTerminaison ? (appointment.dateTerminaison | date: 'dd/MM/yyyy') : ''
+                        }}</td>
+
+                    <td>
+                        @if (editingAppointmentId === appointment.id) {
+                        <select [(ngModel)]="editedStatus">
+                            <option value="En attente">En attente</option>
+                            <option value="Confirmé">Confirmé</option>
+                            <option value="Terminé">Terminé</option>
+                            <option value="Annulé">Annulé</option>
+                        </select>
+                        } @else {
+                        {{ appointment.status }}
+                        }
+                    </td>
+                    <td>
+                        <div class="actions">
+                            @if (editingAppointmentId === appointment.id) {
+                            <button class="save-btn" (click)="saveAppointmentStatus(appointment)">💾</button>
+                            <button class="cancel-btn" (click)="cancelEdit()">❌</button>
+                            } @else {
+                            <button class="edit-btn" (click)="editAppointment(appointment)">⚙</button>
+                            <button class="delete-btn" (click)="deleteAppointment(appointment.id)">🗑</button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                }
+                }
+            </tbody>
+        </table>
+
+        <!-- 🔄 Pagination -->
+        <div class="pagination">
+            <button (click)="prevPage()" [disabled]="page === 0">⬅ Précédent</button>
+            <span>Page {{ page + 1 }} / {{ totalPages }}</span>
+            <button (click)="nextPage()" [disabled]="(page + 1) * itemsPerPage >= filteredAppointments.length">Suivant
+                ➡</button>
+        </div>
+
+        <!-- 📆 Bouton Ajouter un rendez-vous -->
+        <button class="add-appointment-btn" (click)="openAddAppointmentModal()">➕ Ajouter un rendez-vous</button>
+
+        <!-- 📆 Modale pour ajouter un rendez-vous -->
+        @if (showAddAppointmentModal) {
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>📆 Ajouter un rendez-vous</h3>
+                <form (ngSubmit)="addAppointment()">
+
+                    <!-- 🔍 Sélection du Client avec recherche -->
+                    <label>Client :</label>
+                    <div class="client-search-container">
+                        <input type="text" [(ngModel)]="clientSearch" (focus)="showClientDropdown = true"
+                            (input)="filterClients()" name="clientSearch" placeholder="Rechercher un client..."
+                            required>
+
+                        <!-- 🏷 Liste des clients filtrés -->
+                        @if (showClientDropdown && filteredClients.length > 0) {
+                        <div class="client-dropdown">
+                            @for (client of filteredClients; track client.email) {
+                            <div (click)="selectClient(client)" class="client-item">
+                                <span class="client-name">{{ client.name }}</span>
+                                <span class="client-email">{{ client.email }}</span>
+                            </div>
+                            }
+                        </div>
+                        }
+                    </div>
+
+
+                    <!-- 🏷 Employé -->
+                    <label>Employé :</label>
+                    <select [(ngModel)]="newAppointment.employeeName" name="employeeName" required>
+                        @for (employee of employees; track employee.id) {
+                        <option [value]="employee.name">{{ employee.name }}</option>
+                        }
+                    </select>
+
+                    <label>Service :</label>
+                    <input type="text" [(ngModel)]="newAppointment.service" name="service" required>
+
+                    <label>Date :</label>
+                    <input type="date" [(ngModel)]="newAppointment.date" name="date" required>
+
+                    <label>Heure :</label>
+                    <input type="time" [(ngModel)]="newAppointment.time" name="time" required>
+
+                    <label>Statut :</label>
+                    <select [(ngModel)]="newAppointment.status" name="status">
+                        @for (status of appointmentStatuses; track status) {
+                        <option [value]="status">{{ status }}</option>
+                        }
+                    </select>
+
+                    <div class="modal-actions">
+                        <button type="submit" class="save-btn">Ajouter</button>
+                        <button type="button" class="cancel-btn" (click)="closeAddAppointmentModal()">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        }
+
+
+    </div>
+</section>

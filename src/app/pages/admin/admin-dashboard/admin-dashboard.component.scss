@@ -1,0 +1,54 @@
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh; /* Prend toute la hauteur de l'écran */
+}
+
+.admin-container {
+  display: flex;
+  width: 100%;
+}
+
+/* ✅ Fixer la sidebar en hauteur */
+.sidebar {
+  width: 250px;
+  background: #222;
+  color: white;
+  padding: 20px;
+  height: 100vh; /* Prend toute la hauteur */
+  position: fixed; /* Fixe la sidebar */
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto; /* Ajoute un scroll si le contenu est trop grand */
+}
+
+/* ✅ Déplace le contenu à droite pour ne pas être caché par la sidebar */
+.admin-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px; /* Décale le contenu pour ne pas être sous la sidebar */
+}
+
+/* ✅ Gérer les liens de navigation */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background: #b8860b;
+}

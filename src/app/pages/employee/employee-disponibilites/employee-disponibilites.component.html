@@ -1,0 +1,66 @@
+<h2> SAISIR VOS DISPONIBILITÉS</h2>
+<section class="weekly-scheduler">
+    <div class="header">
+      <button (click)="previousWeek()">⬅</button>
+      <h3>Semaine du {{ monday | date: 'dd/MM/yyyy' }} au {{ friday | date: 'dd/MM/yyyy' }}</h3>
+      <button (click)="nextWeek()">➡</button>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Heure</th>
+          @for (day of weekDays; track day) {
+            <th>
+              <div>
+                {{ day | date: 'EEEE dd/MM' : undefined : 'fr' }}
+                <br />
+                @if (!isPast(day)) {
+                  <button class="day-select-btn" (click)="selectFullDay(day)">Tout le jour</button>
+                }
+              </div>
+            </th>
+          }
+        </tr>
+      </thead>
+  
+      <tbody>
+        @for (slot of timeSlots; track slot) {
+          <tr>
+            <td>{{ slot }}</td>
+            @for (day of weekDays; track day) {
+              <td>
+                <input
+                  type="checkbox"
+                  [checked]="isSlotAvailable(day, slot)"
+                  [disabled]="isSlotBooked(day, slot) || isPast(day)"
+                  [class.booked]="isSlotBooked(day, slot)"
+                  [class.past]="isPast(day)"
+                  (change)="toggleSlot(day, slot)"
+                />
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  
+    <div class="actions">
+      <button (click)="selectAllWeek()">
+        @if (!allWeekSelected) {
+          ✅ Tout sélectionner
+        } @else {
+          ❌ Tout déselectionner
+        }
+      </button>
+      <button (click)="saveDisponibilites()">💾 Enregistrer</button>
+    </div>
+  
+    @if (successMessage) {
+      <div class="success-message">{{ successMessage }}</div>
+    }
+    @if (errorMessage) {
+      <div class="error-message">{{ errorMessage }}</div>
+    }
+  </section>
+  

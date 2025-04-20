@@ -1,0 +1,301 @@
+<section class="users-management">
+    <div class="container">
+        <h2>👥 Gestion des utilisateurs</h2>
+
+        <!-- 📌 Gestion des Clients -->
+        <h3>👤 Clients</h3>
+
+        <!-- Filtres Clients -->
+        <div class="filters">
+            <label for="clientStatusFilter">Filtrer par statut :</label>
+            <select id="clientStatusFilter" [(ngModel)]="clientStatusFilter">
+                <option value="all">Tous</option>
+                <option value="actif">Actif</option>
+                <option value="bloqué">Bloqué</option>
+            </select>
+
+            <label for="clientSortBy">Trier par :</label>
+            <select id="clientSortBy" [(ngModel)]="clientSortBy">
+                <option value="date">Date de création</option>
+                <option value="appointments">Rendez-vous terminés</option>
+            </select>
+        </div>
+
+        <!-- Tableau Clients -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Statut</th>
+                    <th>Date de création</th>
+                    <th>RDV terminés</th>
+                    <th>RDV annulés</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (paginatedClients.length === 0) {
+                <tr>
+                    <td colspan="9" class="no-data">Aucun client trouvé.</td>
+                </tr>
+                } @else {
+                @for (user of paginatedClients; track user.id) {
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>
+                        @if (editingUserId === user.id) {
+                        <select [(ngModel)]="editedStatus">
+                            <option value="actif">Actif</option>
+                            <option value="bloqué">Bloqué</option>
+                        </select>
+                        } @else {
+                        {{ user.status | titlecase}}
+                        }
+                    </td>
+                    <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ user.completedAppointments }}</td>
+                    <td>{{ user.canceledAppointments }}</td>
+                    <td>
+                        <div class="actions">
+                            @if (editingUserId === user.id) {
+                            <button class="save-btn" (click)="saveUserStatus(user)">
+                                💾
+                            </button>
+                            <button class="cancel-btn" (click)="cancelEdit()">
+                                ❌
+                            </button>
+                            } @else {
+                            <button class="edit-btn" (click)="editUser(user)">
+                                ⚙
+                            </button>
+                            <button class="edit-btn" (click)="togglePasswordEdit(user)">
+                                🔑
+                            </button>
+                            <button class="delete-btn" (click)="deleteUser(user.id)">
+                                🗑
+                            </button>
+                            }
+
+                            <!-- 📌 Affichage du formulaire de changement de mot de passe -->
+                            @if (editingPasswordUserId === user.id) {
+                            <div class="password-edit-form">
+                                <input type="text" [(ngModel)]="newPassword[user.id]"
+                                    placeholder="Nouveau mot de passe">
+                                <input type="password" [(ngModel)]="confirmPassword[user.id]" placeholder="Confirmer">
+                                <button class="save-btn" (click)="changePassword(user)">💾</button>
+                                <button class="cancel-btn" (click)="cancelPasswordEdit()">❌</button>
+                            </div>
+                            }
+                        </div>
+                    </td>
+
+                </tr>
+                }
+                }
+            </tbody>
+        </table>
+
+        <!-- Pagination Clients -->
+        <div class="pagination">
+            <button (click)="prevPage('client')" [disabled]="clientPage === 0">⬅ Précédent</button>
+            <span>Page {{ clientPage + 1 }} / {{ totalClientPages }}</span>
+            <button (click)="nextPage('client')"
+                [disabled]="(clientPage + 1) * itemsPerPage >= filteredClients.length">Suivant ➡</button>
+        </div>
+
+        <!-- Bouton Ajouter un employé -->
+        <button class="add-user-btn" (click)="openAddClientModal()">➕ Ajouter un client</button>
+
+        <!-- Modale pour ajouter un employé -->
+        @if (showAddClientModal) {
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>🛠 Ajouter un client</h3>
+                <form (ngSubmit)="addClient()">
+                    <label>Nom :</label>
+                    <input type="text" [(ngModel)]="newClient.name" name="name" required>
+
+                    <label>Email :</label>
+                    <input type="email" [(ngModel)]="newClient.email" name="email" required>
+
+                    <label>Téléphone :</label>
+                    <input type="text" [(ngModel)]="newClient.phone" name="phone" required>
+
+                    <label>Mot de passe Temporaire :</label>
+                    <input type="password" [(ngModel)]="newClient.password" name="password" required>
+
+                    <label>Statut :</label>
+                    <select [(ngModel)]="newClient.status" name="status">
+                        <option value="actif">Actif</option>
+                        <option value="inactif">Inactif</option>
+                        <option value="bloqué">Bloqué</option>
+                    </select>
+
+                    <div class="modal-actions">
+                        <button type="submit">Ajouter</button>
+                        <button type="button" class="cancel-btn" (click)="closeAddClientModal()">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        }
+
+        <br>
+        <br>
+
+        <!-- 🛠 Gestion des Employés -->
+        <h3>🛠 Employés</h3>
+
+        <!-- Filtres Employés -->
+        <div class="filters">
+            <label for="employeeStatusFilter">Filtrer par statut :</label>
+            <select id="employeeStatusFilter" [(ngModel)]="employeeStatusFilter">
+                <option value="all">Tous</option>
+                <option value="actif">Actif</option>
+                <option value="inactif">Inactif</option>
+                <option value="en congé">En Congé</option>
+            </select>
+
+            <label for="employeeSortBy">Trier par :</label>
+            <select id="employeeSortBy" [(ngModel)]="employeeSortBy">
+                <option value="date">Date de création</option>
+                <option value="appointments">Rendez-vous terminés</option>
+            </select>
+        </div>
+
+        <!-- Tableau Employés -->
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Statut</th>
+                    <th>Date de création</th>
+                    <th>RDV terminés</th>
+                    <th>RDV annulés</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (paginatedEmployees.length === 0) {
+                <tr>
+                    <td colspan="9" class="no-data">Aucun employé trouvé.</td>
+                </tr>
+                } @else {
+                @for (user of paginatedEmployees; track user.id) {
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>
+                        @if (editingUserId === user.id) {
+                        <select [(ngModel)]="editedStatus">
+                            <option value="actif">Actif</option>
+                            <option value="inactif">Inactif</option>
+                            <option value="en congé">En Congé</option>
+                        </select>
+                        } @else {
+                        {{ user.status | titlecase}}
+                        }
+                    </td>
+                    <td>{{ user.createdAt | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ user.completedAppointments }}</td>
+                    <td>{{ user.canceledAppointments }}</td>
+                    <td>
+                        <div class="actions">
+                            @if (editingUserId === user.id) {
+                            <button class="save-btn" (click)="saveUserStatus(user)">
+                                💾
+                            </button>
+                            <button class="cancel-btn" (click)="cancelEdit()">
+                                ❌
+                            </button>
+                            } @else {
+                            <button class="edit-btn" (click)="editUser(user)">
+                                ⚙
+                            </button>
+                            <button class="edit-btn" (click)="togglePasswordEdit(user)">
+                                🔑
+                            </button>
+                            <button class="delete-btn" (click)="deleteUser(user.id)">
+                                🗑
+                            </button>
+                            }
+
+                            <!-- 📌 Affichage du formulaire de changement de mot de passe -->
+                            @if (editingPasswordUserId === user.id) {
+                            <div class="password-edit-form">
+                                <input type="text" [(ngModel)]="newPassword[user.id]"
+                                    placeholder="Nouveau mot de passe">
+                                <input type="password" [(ngModel)]="confirmPassword[user.id]" placeholder="Confirmer">
+                                <button class="save-btn" (click)="changePassword(user)">💾</button>
+                                <button class="cancel-btn" (click)="cancelPasswordEdit()">❌</button>
+                            </div>
+                            }
+                        </div>
+                    </td>
+
+
+                </tr>
+                }
+                }
+            </tbody>
+        </table>
+
+        <!-- Pagination Employés -->
+        <div class="pagination">
+            <button (click)="prevPage('employee')" [disabled]="employeePage === 0">⬅ Précédent</button>
+            <span>Page {{ employeePage + 1 }} / {{ totalEmployeePages }}</span>
+            <button (click)="nextPage('employee')"
+                [disabled]="(employeePage + 1) * itemsPerPage >= filteredEmployees.length">Suivant ➡</button>
+        </div>
+
+        <!-- Bouton Ajouter un employé -->
+        <button class="add-user-btn" (click)="openAddEmployeeModal()">➕ Ajouter un employé</button>
+
+        <!-- Modale pour ajouter un employé -->
+        @if (showAddEmployeeModal) {
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h3>🛠 Ajouter un employé</h3>
+                <form (ngSubmit)="addEmployee()">
+                    <label>Nom :</label>
+                    <input type="text" [(ngModel)]="newEmployee.name" name="name" required>
+
+                    <label>Email :</label>
+                    <input type="email" [(ngModel)]="newEmployee.email" name="email" required>
+
+                    <label>Téléphone :</label>
+                    <input type="text" [(ngModel)]="newEmployee.phone" name="phone" required>
+
+                    <label>Mot de passe Temporaire :</label>
+                    <input type="password" [(ngModel)]="newEmployee.password" name="password" required>
+
+                    <label>Statut :</label>
+                    <select [(ngModel)]="newEmployee.status" name="status">
+                        <option value="actif">Actif</option>
+                        <option value="inactif">Inactif</option>
+                        <option value="en congé">En Congé</option>
+                    </select>
+
+                    <div class="modal-actions">
+                        <button type="submit">Ajouter</button>
+                        <button type="button" class="cancel-btn" (click)="closeAddEmployeeModal()">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        }
+
+
+    </div>
+</section>

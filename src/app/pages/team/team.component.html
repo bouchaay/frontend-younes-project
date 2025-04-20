@@ -1,0 +1,61 @@
+<section class="team">
+    <div class="container">
+        <h2>Notre Équipe</h2>
+
+        <!-- Section d'introduction -->
+        <div class="team-intro">
+            <p>
+                Chez <strong>Salon Beauté</strong>, notre équipe est composée de professionnels expérimentés et passionnés. 
+                Chaque coiffeur et coloriste possède un savoir-faire exceptionnel pour répondre à toutes vos attentes. 
+                Que ce soit pour une coupe moderne, une coloration sur-mesure ou un soin capillaire revitalisant, 
+                nous sommes là pour sublimer votre beauté et vous offrir un moment de bien-être.
+            </p>
+            <p>
+                Notre mission ? Vous proposer une expérience unique où expertise et attention aux détails sont au cœur de notre service. 
+                Faites confiance à nos artistes pour révéler le meilleur de vous-même !
+            </p>
+        </div>
+
+        <!-- Section des employés -->
+        <div class="team-grid">
+            @for (employee of employees; track employee.id) {
+                <div class="team-card">
+                    <img [src]="employee.image" [alt]="employee.name">
+                    <h3>{{ employee.name }}</h3>
+                    <div class="specialties">
+                        <strong>Spécialités :</strong>
+                        @for (specialty of employee.specialties; track specialty) {
+                            <span class="badge">{{ specialty }}</span>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Section des témoignages -->
+        <div class="testimonials">
+            <h3>Ce que disent nos clients</h3>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"Une équipe formidable ! Ils ont su comprendre exactement ce que je voulais et le résultat était au-delà de mes attentes."</p>
+                    <strong>- Marie L.</strong>
+                </div>
+                <div class="testimonial">
+                    <p>"Un service impeccable et une ambiance chaleureuse. Je ne confierais mes cheveux à personne d'autre !"</p>
+                    <strong>- Thomas B.</strong>
+                </div>
+                <div class="testimonial">
+                    <p>"Professionnalisme et talent sont les maîtres mots ici. Merci pour cette magnifique transformation !"</p>
+                    <strong>- Emma R.</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔥 Bouton "Prendre Rendez-vous" en bas -->
+        <div class="rendezvous-container">
+            <button class="rendezvous-btn" (click)="navigateToAppointment()">
+                Prendre Rendez-vous
+            </button>
+        </div>
+    </div>
+</section>

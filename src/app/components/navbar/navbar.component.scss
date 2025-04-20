@@ -1,0 +1,99 @@
+nav {
+    background-color: black;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  .nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .logo img {
+    height: 50px; /* Ajuste selon ton logo */
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center; /* Centre les liens */
+  }
+  
+  .nav-links li {
+    margin: 0 20px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: #c4b5a5;
+  }
+  
+  .login-btn {
+    margin-left: auto;
+  }
+  
+  .login-btn a {
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .login-btn a:hover {
+    background-color: #c4b5a5;
+    color: black;
+  }
+  
+ /* 🔥 Centre le nom d'utilisateur */
+ .user-info {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff; /* Texte blanc */
+  padding: 10px 15px;
+  border-radius: 5px;
+  white-space: nowrap; /* Empêche le retour à la ligne */
+  display: flex; /* Utilisation de flexbox */
+  align-items: center; /* Alignement vertical */
+  gap: 15px; /* Espacement entre les éléments */
+
+  p {
+    margin: 0; /* Supprime l'espace par défaut des paragraphes */
+  }
+
+  a {
+    display: inline-block;
+    font-size: 0.8em;
+    color: rgb(255, 0, 0);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      color: #c4b5a5;
+      transform: scale(1.01);
+    }
+  }
+}
+

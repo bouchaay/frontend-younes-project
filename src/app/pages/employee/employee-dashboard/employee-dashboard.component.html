@@ -1,0 +1,85 @@
+<section class="employee-dashboard">
+  <div class="container">
+    <h2>TABLEAU DE BORD EMPLOYÉ</h2>
+
+    <!-- ✅ Section 1 : Rendez-vous Confirmés -->
+    <h3>✅ Rendez-vous à venir</h3>
+    <div class="appointments-wrapper">
+      <div class="appointments">
+        @if (upcomingAppointments.length > 0) {
+          @for (appointment of upcomingAppointments; track appointment.id) {
+            <div class="appointment-card" status="Confirmé">
+              <h4>{{ appointment.service }}</h4>
+              <p><strong>Client :</strong> {{ appointment.clientName }}</p>
+              <p><strong>Date :</strong> {{ appointment.date }}</p>
+              <p><strong>Heure :</strong> {{ appointment.time }}</p>
+              <button class="urgent-cancel-btn" (click)="cancelAppointment(appointment.id, true)">⚠ Annuler d'urgence</button>
+              <button class="complete-btn" (click)="updateStatus(appointment.id, 'Terminé')">✅ Terminer</button>
+            </div>
+          }
+        } @else {
+          <p class="no-appointments">Aucun rendez-vous confirmé pour le moment.</p>
+        }
+      </div>
+    </div>
+
+    <!-- ⏳ Section 2 : Rendez-vous à Confirmer -->
+    <h3>⏳ Rendez-vous à confirmer</h3>
+    <div class="appointments-wrapper">
+      <div class="appointments">
+        @if (pendingAppointments.length > 0) {
+          @for (appointment of pendingAppointments; track appointment.id) {
+            <div class="appointment-card" status="En attente">
+              <h4>{{ appointment.service }}</h4>
+              <p><strong>Client :</strong> {{ appointment.clientName }}</p>
+              <p><strong>Date :</strong> {{ appointment.date }}</p>
+              <p><strong>Heure :</strong> {{ appointment.time }}</p>
+              <button class="confirm-btn" (click)="updateStatus(appointment.id, 'Confirmé')">✔ Confirmer</button>
+              <button class="cancel-btn" (click)="cancelAppointment(appointment.id, false)">❌ Annuler</button>
+            </div>
+          }
+        } @else {
+          <p class="no-appointments">Aucun rendez-vous en attente de confirmation.</p>
+        }
+      </div>
+    </div>
+
+    <!-- 🏁 Section 3 : Rendez-vous Terminés -->
+    <h3>🏁 Rendez-vous terminés</h3>
+    <div class="appointments-wrapper">
+      <div class="appointments">
+        @if (completedAppointments.length > 0) {
+          @for (appointment of completedAppointments; track appointment.id) {
+            <div class="appointment-card" status="Terminé">
+              <h4>{{ appointment.service }}</h4>
+              <p><strong>Client :</strong> {{ appointment.clientName }}</p>
+              <p><strong>Date :</strong> {{ appointment.date }}</p>
+              <p><strong>Heure :</strong> {{ appointment.time }}</p>
+            </div>
+          }
+        } @else {
+          <p class="no-appointments">Aucun rendez-vous terminé pour le moment.</p>
+        }
+      </div>
+    </div>
+
+    <!-- 🏁 Section 4 : Rendez-vous Annulés -->
+    <h3>❌ Rendez-vous annulés</h3>
+    <div class="appointments-wrapper">
+      <div class="appointments">
+        @if (canceledAppointments.length > 0) {
+          @for (appointment of canceledAppointments; track appointment.id) {
+            <div class="appointment-card" status="Annulé">
+              <h4>{{ appointment.service }}</h4>
+              <p><strong>Client :</strong> {{ appointment.clientName }}</p>
+              <p><strong>Date :</strong> {{ appointment.date }}</p>
+              <p><strong>Heure :</strong> {{ appointment.time }}</p>
+            </div>
+          }
+        } @else {
+          <p class="no-appointments">Aucun rendez-vous annulé pour le moment.</p>
+        }
+      </div>
+    </div>
+  </div>
+</section>

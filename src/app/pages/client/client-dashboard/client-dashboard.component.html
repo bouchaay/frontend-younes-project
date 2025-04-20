@@ -1,0 +1,142 @@
+<section class="client-dashboard">
+  <div class="container">
+    <h2>Bienvenue sur votre espace client</h2>
+
+    <!-- ✅ Section 1 : Rendez-vous Confirmés -->
+    <h3>✅ Rendez-vous confirmés</h3>
+    <div class="appointments-wrapper">
+      <div class="appointments">
+        @if (upcomingAppointments.length === 0) {
+        <p class="no-appointment">Vous n'avez aucun rendez-vous confirmé.</p>
+        } @else {
+        @for (appointment of upcomingAppointments; track appointment.id) {
+        <div class="appointment-card" status="Confirmé">
+          <h4>{{ appointment.service }}</h4>
+          <p><strong>Date :</strong> {{ appointment.date }}</p>
+          <p><strong>Heure :</strong> {{ appointment.time }}</p>
+          @if (appointment.employeeName && appointment.employeeName !== '') {
+          <p><strong>Employé :</strong> {{ appointment.employeeName }}</p>
+          }
+
+          <!-- 🔥 Bouton Annuler d'urgence -->
+          <button class="cancel-btn urgent" (click)="cancelAppointment(appointment.id)">Annuler d'urgence</button>
+        </div>
+        }
+        }
+      </div>
+    </div>
+    <p class="info-confirmation">
+      ℹ️ Les rendez-vous confirmés peuvent être annulés au plus tard <strong>48 heures avant leur heure prévue</strong>.
+    </p>
+
+    <!-- ⏳ Section 2 : Rendez-vous en attente -->
+    <h3>⏳ Rendez-vous en attente</h3>
+    <div class="appointments-wrapper">
+      <div class="appointments">
+        @if (pendingAppointments.length === 0) {
+        <p class="no-appointment">Vous n'avez aucun rendez-vous en attente.</p>
+        } @else {
+        @for (appointment of pendingAppointments; track appointment.id) {
+        <div class="appointment-card" status="En attente">
+          <h4>{{ appointment.service }}</h4>
+          <p><strong>Date :</strong> {{ appointment.date }}</p>
+          <p><strong>Heure :</strong> {{ appointment.time }}</p>
+          @if (appointment.employeeName && appointment.employeeName !== '') {
+          <p><strong>Employé :</strong> {{ appointment.employeeName }}</p>
+          }
+
+          <!-- 🔥 Bouton Annuler un rendez-vous en attente -->
+          <button class="cancel-btn" (click)="cancelAppointment(appointment.id)">Annuler</button>
+        </div>
+        }
+        }
+      </div>
+    </div>
+
+    <!-- 🏁 Section 3 : Rendez-vous Terminés -->
+    <h3>🏁 Rendez-vous terminés</h3>
+    <div class="appointments-wrapper">
+      <div class="appointments">
+        @if (completedAppointments.length === 0) {
+        <p class="no-appointment">Aucun rendez-vous terminé.</p>
+        } @else {
+        @for (appointment of completedAppointments; track appointment.id) {
+        <div class="appointment-card" status="Terminé">
+          <h4>{{ appointment.service }}</h4>
+          <p><strong>Date :</strong> {{ appointment.date }}</p>
+          <p><strong>Heure :</strong> {{ appointment.time }}</p>
+          <p><strong>Employé :</strong> {{ appointment.employeeName }}</p>
+        </div>
+        }
+        }
+      </div>
+    </div>
+
+    <h3>❌ Rendez-vous annulés</h3>
+    <div class="appointments-wrapper">
+      <div class="appointments">
+        @if (canceledAppointments.length === 0) {
+        <p class="no-appointment">Aucun rendez-vous annulé.</p>
+        } @else {
+        @for (appointment of canceledAppointments; track appointment.id) {
+        <div class="appointment-card" status="Annulé">
+          <h4>{{ appointment.service }}</h4>
+          <p><strong>Date :</strong> {{ appointment.date }}</p>
+          <p><strong>Heure :</strong> {{ appointment.time }}</p>
+          <p><strong>Employé :</strong> {{ appointment.employeeName }}</p>
+        </div>
+        }
+        }
+      </div>
+    </div>
+
+    <!-- 📆 Bouton Prendre un RDV -->
+    <div class="appointment-btn-wrapper">
+      <button class="appointment-btn" (click)="openAppointmentModal()">Prendre un rendez-vous</button>
+    </div>
+
+    <!-- 📆 Modale pour prendre un rendez-vous -->
+    @if (showAppointmentModal) {
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <h3>Prendre un rendez-vous</h3>
+        <form (ngSubmit)="bookAppointment()">
+          <label>Service :</label>
+          <select [(ngModel)]="selectedService" name="service" [compareWith]="compareServices" (change)="onServiceChange()"required>
+            @for (service of availableServices; track service) {
+            <option [ngValue]="service"> {{ service.label }} — {{ formatDuration(service.duration) }} </option>
+            }
+          </select>
+
+          <!--
+          <label>Professionnel :</label>
+          <select [(ngModel)]="newAppointment.employeeName" name="employeeName" required>
+            @for (employee of employees; track employee.id) {
+            <option [value]="employee.name">{{ employee.name }}</option>
+            }
+          </select>
+        -->
+          <label>Date :</label>
+          <input type="date" [(ngModel)]="newAppointment.date" name="date" required (change)="onDateChange($event)"
+            [min]="minDate" />
+
+          <label>Heure :</label>
+          <select [(ngModel)]="newAppointment.time" name="time" required>
+            <option value="" disabled selected hidden>Choisissez une heure</option>
+            @for (slot of timeSlots; track slot) {
+            <option [value]="slot" [disabled]="unavailableSlots.includes(slot) || tooLateSlots.includes(slot)">
+              {{ slot }} @if (unavailableSlots.includes(slot)) { (indisponible) } @else if (tooLateSlots.includes(slot)) { (trop tard) }
+            </option>
+            }
+          </select>
+
+          <div class="modal-actions">
+            <button type="submit" class="save-btn">Réserver</button>
+            <button type="button" class="cancel-btn" (click)="closeAppointmentModal()">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,111 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Pleine hauteur */
+  background: #c4b5a5;
+  
+  .container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    
+    label {
+      font-weight: bold;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #c4b5a5;
+        outline: none;
+      }
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.9rem;
+      margin: 10px 0;
+    }
+
+    button {
+      background: #c4b5a5;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        background: #54c540;
+        transform: scale(1.02);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      &:disabled {
+        background: gray;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+    }
+  }
+
+  /* 🔥 Style pour le lien "S'inscrire" */
+  .register-link {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #444;
+
+    a {
+      color: #c4b5a5;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+      // modifier le pointeur de la souris
+      cursor: pointer;
+
+      &:hover {
+        color: #8b6508; /* Doré plus foncé */
+        text-decoration: underline;
+      }
+    }
+  }
+}

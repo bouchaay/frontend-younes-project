@@ -1,0 +1,31 @@
+<section class="contact">
+    <div class="container">
+      <h2>Contactez-nous</h2>
+      <p>Notre équipe est à votre disposition pour toute question ou prise de rendez-vous.</p>
+  
+      <div class="contact-info">
+        <div class="info-card">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>Adresse</h3>
+          <p>{{ address }}</p>
+        </div>
+  
+        <div class="info-card">
+          <i class="fas fa-phone-alt"></i>
+          <h3>Téléphone</h3>
+          <p>{{ phone }}</p>
+        </div>
+  
+        <div class="info-card">
+          <i class="fas fa-envelope"></i>
+          <h3>Email</h3>
+          <p>{{ email }}</p>
+        </div>
+      </div>
+  
+      <div class="map-container">
+        <iframe [src]="mapSrc" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+  

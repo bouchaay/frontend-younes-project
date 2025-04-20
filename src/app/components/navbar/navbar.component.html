@@ -1,0 +1,43 @@
+<nav>
+  <div class="nav-container">
+    <!-- Logo à gauche -->
+    <div class="logo">
+      <a routerLink="/">
+        <img src="assets/images/logo-yy.png" alt="Logo du salon">
+      </a>
+    </div>
+
+    <!-- Liens du menu -->
+    @if (!isLoggedIn) {
+      <ul class="nav-links">
+        <li><a routerLink="/">Accueil</a></li>
+        <li><a routerLink="/services">Services</a></li>
+        <!-- <li><a routerLink="/team">Équipe</a></li> -->
+        <li><a routerLink="/contact">Contact</a></li>
+        <li><a routerLink="/about">À Propos</a></li>
+      </ul>
+    } @else {
+      <div class="user-info">
+        <p>Bienvenue dans votre espace {{ typeEspace }}</p>
+        @if (!isInAdminPage && isAdmin) {
+          <p><a routerLink="/admin">Accéder à l'administration</a></p>
+        } @else if (!isInClientPage && isClient) {
+          <p><a routerLink="/client">Retour à l'espace client</a></p>
+        } @else if (!isInEmployeePage && isEmployee) {
+          <p><a routerLink="/employee">Retour à l'espace employé</a></p>
+        } @else if (!isInAcceuillPage) {
+          <p><a routerLink="/">Retour à l'acceuil</a></p>
+        }
+      </div>
+    }
+
+    <!-- Bouton de connexion à droite -->
+    <div class="login-btn">
+      @if (isLoggedIn) {
+        <a (click)="logout()">Se déconnecter</a>
+      } @else {
+        <a routerLink="/login">Se connecter</a>
+      }
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,69 @@
+<section class="register">
+    <div class="register-container">
+        <h2>Créer un compte</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label for="firstName">Nom <span style="color :red;">*</span></label>
+                <input type="text" id="firstName" formControlName="firstName" placeholder="Entrez votre nom">
+                @if (f['firstName'].touched && f['firstName'].invalid) {
+                    <small class="error">Le nom est obligatoire.</small>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Prénom <span style="color :red;">*</span></label>
+                <input type="text" id="lastName" formControlName="lastName" placeholder="Entrez votre prénom">
+                @if (f['lastName'].touched && f['lastName'].invalid) {
+                    <small class="error">Le prénom est obligatoire.</small>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email <span style="color :red;">*</span></label>
+                <input type="email" id="email" formControlName="email" placeholder="Entrez votre email">
+                @if (f['email'].touched && f['email'].invalid) {
+                    <small class="error">Email invalide.</small>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Téléphone <span style="color :red;">*</span></label>
+                <input type="text" id="phone" formControlName="phone" placeholder="Entrez votre numéro de téléphone">
+                @if (f['phone'].touched && f['phone'].invalid) {
+                    <small class="error">Numéro invalide.</small>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe <span style="color :red;">*</span></label>
+                <input type="password" id="password" formControlName="password" placeholder="Entrez votre mot de passe">
+                @if (f['password'].touched && f['password'].invalid) {
+                    <small class="error">Le mot de passe doit contenir au moins 6 caractères.</small>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirmer le mot de passe <span style="color :red;">*</span></label>
+                <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirmez votre mot de passe">
+                @if (registerForm.errors?.['notMatching']) {
+                    <small class="error">Les mots de passe ne correspondent pas.</small>
+                }
+            </div>
+
+            <button type="submit" [disabled]="registerForm.invalid || loading">
+                @if (!loading) { S'inscrire } @else { Chargement... }
+            </button>
+
+            @if (errorMessage) {
+                <p class="error-message">{{ errorMessage }}</p>
+            }
+
+            <!-- 🔥 Ajout du lien vers la connexion -->
+            <div class="login-link">
+                <p>Vous avez déjà un compte ? <a (click)="goToLogin()">Connectez-vous</a></p>
+            </div>
+
+        </form>
+    </div>
+</section>
