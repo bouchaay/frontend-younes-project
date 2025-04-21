@@ -1,0 +1,309 @@
+{
+  "NAV": {
+    "HOME": "Home",
+    "SERVICES": "Services",
+    "APPOINTMENT": "Appointment",
+    "CONTACT": "Contact",
+    "ABOUT": "About",
+    "ADMIN": "Go to admin panel",
+    "CLIENT": "Back to client space",
+    "EMPLOYEE": "Back to employee space",
+    "BACK_HOME": "Back to home",
+    "LOGIN": "Login",
+    "LOGOUT": "Logout",
+    "LOGOUT_TITLE": "Logout",
+    "LOGOUT_MSG": "Are you sure you want to log out?",
+    "LOGOUT_CONFIRM": "Yes, log me out",
+    "CANCEL": "No, stay logged in",
+    "LOGOUT_SUCCESS_TITLE": "Successfully logged out",
+    "LOGOUT_SUCCESS_MSG": "You have been successfully logged out.",
+    "LOGIN_REQUIRED": "Login required",
+    "LOGIN_REQUIRED_MSG": "Please log in to continue."
+  },
+  "LEGAL": {
+    "TITLE": "Legal Notice",
+    "EDITOR": {
+      "TITLE": "Site Publisher",
+      "NAME": "Name:",
+      "ADDRESS": "Address:",
+      "PHONE": "Phone:",
+      "EMAIL": "Email:",
+      "RESPONSIBLE": "Publishing Manager:"
+    },
+    "HOSTING": {
+      "TITLE": "Hosting",
+      "NAME": "Host:"
+    },
+    "IP": {
+      "TITLE": "Intellectual Property",
+      "CONTENT": "The content of this site is protected by Canadian copyright and intellectual property laws. Any reproduction or use without permission is prohibited."
+    },
+    "DATA": {
+      "TITLE": "Personal Data",
+      "CONTENT": "This site may collect data via forms, cookies, or analytics tools. You have the right to access, correct or delete your data by contacting"
+    },
+    "COOKIES": {
+      "TITLE": "Cookies",
+      "CONTENT": "This site uses cookies for statistical purposes and to improve your browsing experience. You can disable them from your browser."
+    },
+    "RESPONSIBILITY": {
+      "TITLE": "Responsibility",
+      "CONTENT": "The publisher cannot be held responsible for any errors, interruptions or inaccuracies on the site. The user is responsible for their use of the content."
+    },
+    "LAW": {
+      "TITLE": "Governing Law",
+      "CONTENT": "The site is governed by Canadian law. Any dispute will be subject to the exclusive jurisdiction of the courts of Montreal, Quebec."
+    },
+    "LAST_UPDATE": "Last updated: April 2025"
+  },
+  "ABOUT": {
+    "TITLE": "About Institut Y&Y",
+    "INTRO": "Nestled in the heart of Montreal, Institut Y&Y is more than just a hair salon. It's a true wellness sanctuary, designed to enhance your natural beauty while offering you a moment of relaxation.",
+    "PARAGRAPH1": "Our team of passionate hairdressers combines expertise, creativity, and attentiveness to meet all your desires: from trendy cuts to vibrant coloring, including deep and personalized hair treatments.",
+    "PARAGRAPH2": "At Y&Y, every client is unique. We take the time to listen to you, analyze your face shape, hair type, and habits to offer a tailored service that matches your style.",
+    "PARAGRAPH3": "We use only premium professional products and up-to-date techniques to guarantee long-lasting, elegant, and hair-friendly results.",
+    "SPECIALTIES": {
+      "TITLE": "Our specialties",
+      "CUTS": {
+        "TITLE": "Custom cuts and hairstyles:",
+        "DESC": "modern, elegant, or bold."
+      },
+      "COLOR": {
+        "TITLE": "Coloring and highlights:",
+        "DESC": "to illuminate your hair and enhance your glow."
+      },
+      "CARE": {
+        "TITLE": "Hair care:",
+        "DESC": "to nourish, repair, and deeply strengthen."
+      },
+      "SMOOTHING": {
+        "TITLE": "Smoothing and perms:",
+        "DESC": "for a controlled texture, straight or curly."
+      },
+      "WEDDING": {
+        "TITLE": "Wedding & special event hairstyles:",
+        "DESC": "for an unforgettable look on your big day."
+      }
+    },
+    "CONCLUSION": "Book your appointment today and enjoy a unique experience in Montreal at Institut Y&Y. Let us take care of you and your hair with passion and excellence."
+  },
+  "DASHBOARD": {
+    "TITLE": "Welcome to your client space",
+    "BOOK_BUTTON": "Book an appointment",
+    "CONFIRMED": "Confirmed Appointments",
+    "NO_CONFIRMED": "You have no confirmed appointments.",
+    "CONFIRMED_INFO": "Confirmed appointments can be canceled up to 48 hours before the scheduled time.",
+    "PENDING": "Pending Appointments",
+    "NO_PENDING": "You have no pending appointments.",
+    "COMPLETED": "Completed Appointments",
+    "NO_COMPLETED": "No completed appointments.",
+    "CANCELED": "Canceled Appointments",
+    "NO_CANCELED": "No canceled appointments.",
+    "DATE": "Date:",
+    "TIME": "Time:",
+    "EMPLOYEE": "Employee:",
+    "CANCEL": "Cancel",
+    "CANCEL_URGENT": "Urgent cancel",
+    "MODAL_TITLE": "Book an appointment",
+    "MODAL_SERVICE": "Service:",
+    "MODAL_DATE": "Date:",
+    "MODAL_TIME": "Time:",
+    "MODAL_TIME_PLACEHOLDER": "Choose a time",
+    "MODAL_SUBMIT": "Confirm",
+    "MODAL_CANCEL": "Cancel",
+    "SLOT_UNAVAILABLE": "unavailable",
+    "SLOT_TOO_LATE": "too late"
+  },
+  "SERVICES-DASH": {
+    "Mise en plis": "Blow-dry",
+    "Coupe": "Haircut",
+    "Coupe & Mise en plis": "Haircut & Blow-dry",
+    "Soin capillaire & Lissage": "Hair Care & Smoothing",
+    "Botox capillaire": "Hair Botox Treatment",
+    "Coloration racine": "Root Coloring",
+    "Coloration complète": "Full Coloring",
+    "Toner": "Toner",
+    "Balayage": "Balayage",
+    "Mèches demi-tête": "Half-head Highlights",
+    "Pose de rallonges": "Hair Extensions"
+  },
+  "CLIENT_MENU": {
+    "DASHBOARD": "Dashboard",
+    "CHANGE_PASSWORD": "Change password",
+    "EDIT_PROFILE": "Edit my info"
+  },
+  "PROFILE": {
+    "TITLE": "MY PERSONAL INFO",
+    "LASTNAME": "Last name",
+    "FIRSTNAME": "First name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "PLACEHOLDER_LASTNAME": "Your last name",
+    "PLACEHOLDER_FIRSTNAME": "Your first name",
+    "PLACEHOLDER_EMAIL": "Your email",
+    "PLACEHOLDER_PHONE": "Your phone number",
+    "SAVE": "Save",
+    "SUCCESS": "✅ Your information has been successfully updated.",
+    "ERROR": "❌ An error occurred. Please try again."
+  },
+  "CONTACT": {
+    "TITLE": "Contact us",
+    "SUBTITLE": "Our team is available for any questions or appointment requests.",
+    "ADDRESS_LABEL": "Address",
+    "PHONE_LABEL": "Phone",
+    "EMAIL_LABEL": "Email"
+  },
+  "HOME": {
+    "HERO": {
+      "TITLE": "Y&Y HAIR INSTITUTE",
+      "SUBTITLE": "BY JASMINE",
+      "CTA": "Discover our services"
+    },
+    "ABOUT": {
+      "TITLE": "ABOUT US",
+      "DESCRIPTION": "Welcome to Institut Y&Y, your sanctuary of beauty and well-being in Montreal.\n\nLocated in the heart of the city, our women’s hair salon offers a unique experience combining expertise, creativity, and personalized care. Whether you’re looking for a modern haircut, vibrant color, or deep treatment, our team is here to reveal your hair’s natural beauty.\n\nWe use high-quality products and cutting-edge techniques to provide services tailored to your needs. At Institut Y&Y, every client is unique—we take the time to understand your style and deliver a look that suits you best.\n\nWhether you're in for relaxation or a bold transformation, we promise exceptional service and a memorable experience. Discover the art of hairstyling with a luxurious touch in Montreal."
+    },
+    "APPOINT": {
+      "TITLE": "Book in just a few clicks, relax",
+      "ONLINE": {
+        "TITLE": "Online Booking",
+        "TEXT": "Check our calendar at any time to book your next service. Log in or create an account to request a personalized appointment. We're here for you!",
+        "BTN": "Book now"
+      },
+      "PHONE": {
+        "TITLE": "Phone Appointment",
+        "TEXT": "Prefer to speak with a professional to schedule your visit? Our team is here for you during our business hours. Feel free to give us a call!",
+        "BTN": "Call us"
+      }
+    },
+    "BIO": {
+      "TITLE": "Y&Y Excellence with La Biosthétique",
+      "DESCRIPTION": "At Y&Y Salon, we’ve chosen excellence by offering La Biosthétique products — a reference in high-end hair care. From the first application, your hair gains shine, softness, and long-lasting brilliance.\n\nBut our expertise goes further. With personalized express treatments, we care for your scalp: hair loss, itching, dryness, or dandruff — every concern has a solution.\n\nNot sure what’s right for you? Our expert stylists are here to guide you toward the perfect routine for daily hair beauty."
+    },
+    "HOURS": {
+      "TITLE": "Opening Hours",
+      "CLOSED": "Closed",
+      "BY_APPOINTMENT": "By Appointment",
+      "FOOTER": "Our team welcomes you with pleasure during opening hours. See you soon at Y&Y!"
+    }
+  },
+  "DAYS": {
+    "MONDAY": "Monday",
+    "TUESDAY": "Tuesday",
+    "WEDNESDAY": "Wednesday",
+    "THURSDAY": "Thursday",
+    "FRIDAY": "Friday",
+    "SATURDAY": "Saturday",
+    "SUNDAY": "Sunday"
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "EMAIL": "Email",
+    "PHONE": "Phone number",
+    "PLACEHOLDER_EMAIL": "Enter your email",
+    "PLACEHOLDER_PHONE": "Enter your phone number",
+    "SUBMIT": "Login",
+    "LOADING": "Loading...",
+    "NO_ACCOUNT": "Don't have an account yet?",
+    "REGISTER_LINK": "Join us!"
+  },
+  "REGISTER": {
+    "TITLE": "Create an account",
+    "FIRSTNAME": "First name",
+    "LASTNAME": "Last name",
+    "EMAIL": "Email",
+    "PHONE": "Phone",
+    "PLACEHOLDER_FIRSTNAME": "Enter your first name",
+    "PLACEHOLDER_LASTNAME": "Enter your last name",
+    "PLACEHOLDER_EMAIL": "Enter your email",
+    "PLACEHOLDER_PHONE": "Enter your phone number",
+    "ERROR_FIRSTNAME": "First name is required.",
+    "ERROR_LASTNAME": "Last name is required.",
+    "ERROR_EMAIL": "Invalid email.",
+    "ERROR_PHONE": "Invalid phone number.",
+    "SUBMIT": "Register",
+    "LOADING": "Loading...",
+    "HAVE_ACCOUNT": "Already have an account?",
+    "LOGIN_LINK": "Login"
+  },
+  "SERVICES": {
+    "A": "At",
+    "TITLE": "Our Services",
+    "INTRO": "We offer a complete range of hair care products to suit all hair types and every desire. Whether you're looking to refresh your cut, brighten your color, or deeply condition your hair, our team is here to help.",
+    "HAIRCUT": {
+      "TITLE": "Haircuts",
+      "SHORT": "Short hair",
+      "SHORT_DESC": "A fresh, precise and modern style for easy maintenance.",
+      "SHORT_PRICE": "From $30",
+      "MEDIUM": "Medium-length hair",
+      "MEDIUM_DESC": "Perfect balance between volume, flexibility and movement.",
+      "MEDIUM_PRICE": "Between $40 and $55",
+      "LONG": "Long hair",
+      "LONG_DESC": "Elegant shaping to enhance your length.",
+      "LONG_PRICE": "From $50"
+    },
+    "STYLING": {
+      "TITLE": "Blow-Dry Styling",
+      "SHORT": "Short hair",
+      "SHORT_DESC": "A structured blowout for a chic and lasting effect.",
+      "SHORT_PRICE": "From $30",
+      "MEDIUM": "Medium hair",
+      "MEDIUM_DESC": "Controlled volume for a naturally beautiful look.",
+      "MEDIUM_PRICE": "From $40",
+      "LONG": "Long hair",
+      "LONG_DESC": "Shine and softness for a flawless finish.",
+      "LONG_PRICE": "From $45"
+    },
+    "COLORATION": {
+      "TITLE": "Coloring",
+      "ROOTS": "Roots",
+      "ROOTS_DESC": "Blend your regrowth for a uniform color.",
+      "ROOTS_PRICE": "From $65",
+      "FULL": "Full color",
+      "FULL_DESC": "A fresh new look with shine and brilliance.",
+      "FULL_PRICE": "Around $90",
+      "BLEACH": "Bleaching",
+      "BLEACH_DESC": "For intense blond or a light base before coloring.",
+      "BLEACH_PRICE": "From $185"
+    },
+    "HIGHLIGHTS": {
+      "TITLE": "Highlights",
+      "HALF": "Half head",
+      "HALF_DESC": "Natural lightening to brighten your face.",
+      "HALF_PRICE": "Between $95 and $150",
+      "FULL": "Full head",
+      "FULL_DESC": "A luminous effect across the entire hair.",
+      "FULL_PRICE": "Between $150 and $250"
+    },
+    "BALAYAGE": {
+      "TITLE": "Balayage",
+      "PARTIAL": "Partial",
+      "PARTIAL_DESC": "Subtle touches for a sun-kissed effect on the lengths.",
+      "PARTIAL_PRICE": "Between $185 and $250",
+      "FULL": "Full",
+      "FULL_DESC": "Luminous gradient for a natural and sophisticated look.",
+      "FULL_PRICE": "Between $250 and $400"
+    },
+    "TREATMENTS": {
+      "TITLE": "Hair Treatments",
+      "MASK": "Hydrating Mask",
+      "MASK_DESC": "Intense hydration for soft and shiny hair.",
+      "MASK_PRICE": "From $25",
+      "FUSIO": "Fusio Dose",
+      "FUSIO_DESC": "Tailored cocktail to deeply repair and revitalize.",
+      "FUSIO_PRICE": "Around $30",
+      "BOTOX": "Hair Botox & Smoothing",
+      "BOTOX_DESC": "Smoothing, shine and volume in one complete transformation.",
+      "BOTOX_PRICE": "Between $190 and $350"
+    },
+    "EXTENSIONS": {
+      "TITLE": "Hair Extensions",
+      "CLIP_DESC": "Clip-in extensions to add length and volume.",
+      "COLD_DESC": "Cold fusion extensions for a natural and lasting result.",
+      "HOT_DESC": "Hot fusion extensions for a glamorous and voluminous effect.",
+      "PRICE": "By Consultation"
+    },
+    "DISCLAIMER": "* Prices are indicative and may vary depending on hair length, thickness, and stylist expertise.",
+    "BOOK_BTN": "Book an Appointment"
+  }
+}

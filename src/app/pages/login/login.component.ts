@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule, TranslateModule],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

@@ -9,6 +9,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { provideTranslate } from './core/translate.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()), // ✅ Ajoute les intercepteurs
     provideClientHydration(withEventReplay()),
     importProvidersFrom(ReactiveFormsModule, CommonModule), // ✅ Import de CommonModule ici
-    provideAnimations()
+    provideAnimations(),
+    provideTranslate(),
   ]
 };

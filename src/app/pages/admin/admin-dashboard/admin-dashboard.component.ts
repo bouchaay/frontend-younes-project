@@ -12,29 +12,31 @@ import { AuthService } from '../../../services/auth.service';
 export class AdminDashboardComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
+  isSidebarOpen: boolean = false;
   ngOnInit(): void {
     this.authService.autoLogoutIfExpired();
   }
 
   goToUsers() {
     if (!this.authService.autoLogoutIfExpired()) {
+      this.isSidebarOpen = false; // Close the sidebar when navigating
       this.router.navigateByUrl('/admin/users');
     }
   }
 
   goToAppointments() {
     if (!this.authService.autoLogoutIfExpired()) {
+      this.isSidebarOpen = false; // Close the sidebar when navigating
       this.router.navigateByUrl('/admin/appointments');
     }
   }
 
   goToChangePassword() {
     if (!this.authService.autoLogoutIfExpired()) {
+      this.isSidebarOpen = false; // Close the sidebar when navigating
       this.router.navigateByUrl('/admin/change-password');
     }
   }
-
-  isSidebarOpen: boolean = false;
 
   toggleSidebar() {
     if (!this.authService.autoLogoutIfExpired()) {

@@ -1,0 +1,309 @@
+{
+  "NAV": {
+    "HOME": "Accueil",
+    "SERVICES": "Services",
+    "APPOINTMENT": "Rendez-vous",
+    "CONTACT": "Contact",
+    "ABOUT": "À propos",
+    "ADMIN": "Accéder à l'administration",
+    "CLIENT": "Retour à l'espace client",
+    "EMPLOYEE": "Retour à l'espace employé",
+    "BACK_HOME": "Retour à l'accueil",
+    "LOGIN": "Connexion",
+    "LOGOUT": "Déconnexion",
+    "LOGOUT_TITLE": "Déconnexion",
+    "LOGOUT_MSG": "Êtes-vous sûr de vouloir vous déconnecter ?",
+    "LOGOUT_CONFIRM": "Oui, déconnectez-moi",
+    "CANCEL": "Non, restez connecté",
+    "LOGOUT_SUCCESS_TITLE": "Déconnexion réussie",
+    "LOGOUT_SUCCESS_MSG": "Vous avez été déconnecté avec succès.",
+    "LOGIN_REQUIRED": "Vous devez être connecté pour accéder à cette page.",
+    "LOGIN_REQUIRED_MSG": "Veuillez vous connecter pour continuer."
+  },
+  "LEGAL": {
+    "TITLE": "Mentions Légales",
+    "EDITOR": {
+      "TITLE": "Éditeur du site",
+      "NAME": "Nom :",
+      "ADDRESS": "Adresse :",
+      "PHONE": "Téléphone :",
+      "EMAIL": "Courriel :",
+      "RESPONSIBLE": "Responsable de la publication :"
+    },
+    "HOSTING": {
+      "TITLE": "Hébergement",
+      "NAME": "Hébergeur :"
+    },
+    "IP": {
+      "TITLE": "Propriété intellectuelle",
+      "CONTENT": "Le contenu de ce site est protégé par les lois canadiennes sur le droit d’auteur et la propriété intellectuelle. Toute reproduction ou utilisation sans autorisation est interdite."
+    },
+    "DATA": {
+      "TITLE": "Données personnelles",
+      "CONTENT": "Ce site peut collecter des données via des formulaires, cookies ou outils de mesure d’audience. Vous disposez d’un droit d’accès, de rectification ou de suppression en contactant"
+    },
+    "COOKIES": {
+      "TITLE": "Cookies",
+      "CONTENT": "Ce site utilise des cookies à des fins statistiques et pour améliorer votre navigation. Vous pouvez les désactiver depuis votre navigateur."
+    },
+    "RESPONSIBILITY": {
+      "TITLE": "Responsabilité",
+      "CONTENT": "L’éditeur ne saurait être tenu responsable d’éventuelles erreurs, interruptions ou inexactitudes du site. L’utilisateur reste responsable de l’usage qu’il fait du contenu du site."
+    },
+    "LAW": {
+      "TITLE": "Droit applicable",
+      "CONTENT": "Le site est soumis au droit canadien. Tout litige sera de la compétence exclusive des tribunaux de Montréal, Québec."
+    },
+    "LAST_UPDATE": "Dernière mise à jour : Avril 2025"
+  },
+  "ABOUT": {
+    "TITLE": "À propos de l’Institut Y&Y",
+    "INTRO": "Nichée au cœur de Montréal, l’Institut Y&Y est bien plus qu’un simple salon de coiffure. C’est un véritable cocon de bien-être, pensé pour sublimer votre beauté naturelle tout en vous offrant un moment de détente privilégié.",
+    "PARAGRAPH1": "Notre équipe de coiffeuses passionnées allie savoir-faire, créativité et écoute pour répondre à toutes vos envies : de la coupe tendance à la coloration éclatante, en passant par des soins capillaires profonds et personnalisés.",
+    "PARAGRAPH2": "Chez Y&Y, chaque cliente est unique. Nous prenons le temps de vous écouter, d’analyser votre morphologie, la nature de vos cheveux et vos habitudes pour vous proposer une prestation sur-mesure, en parfaite harmonie avec votre style.",
+    "PARAGRAPH3": "Nous utilisons uniquement des produits professionnels haut de gamme et des techniques actuelles pour vous garantir des résultats durables, élégants et respectueux de la fibre capillaire.",
+    "SPECIALTIES": {
+      "TITLE": "Nos spécialités",
+      "CUTS": {
+        "TITLE": "Coupes et coiffures sur mesure :",
+        "DESC": "modernes, élégantes ou audacieuses."
+      },
+      "COLOR": {
+        "TITLE": "Colorations et mèches :",
+        "DESC": "pour illuminer votre chevelure et révéler votre éclat."
+      },
+      "CARE": {
+        "TITLE": "Soins capillaires :",
+        "DESC": "pour nourrir, réparer et renforcer en profondeur."
+      },
+      "SMOOTHING": {
+        "TITLE": "Lissage et permanentes :",
+        "DESC": "pour une texture maîtrisée, lisse ou bouclée."
+      },
+      "WEDDING": {
+        "TITLE": "Coiffure mariage & occasions spéciales :",
+        "DESC": "pour un look inoubliable le jour J."
+      }
+    },
+    "CONCLUSION": "Réservez votre rendez-vous dès aujourd’hui et vivez une expérience unique à Montréal, au sein de l’Institut Y&Y. Laissez-nous prendre soin de vous et de vos cheveux avec passion et excellence."
+  },
+  "DASHBOARD": {
+    "TITLE": "Bienvenue sur votre espace client",
+    "BOOK_BUTTON": "Prendre un rendez-vous",
+    "CONFIRMED": "Rendez-vous confirmés",
+    "NO_CONFIRMED": "Vous n'avez aucun rendez-vous confirmé.",
+    "CONFIRMED_INFO": "Les rendez-vous confirmés peuvent être annulés au plus tard 48 heures avant leur heure prévue.",
+    "PENDING": "Rendez-vous en attente",
+    "NO_PENDING": "Vous n'avez aucun rendez-vous en attente.",
+    "COMPLETED": "Rendez-vous terminés",
+    "NO_COMPLETED": "Aucun rendez-vous terminé.",
+    "CANCELED": "Rendez-vous annulés",
+    "NO_CANCELED": "Aucun rendez-vous annulé.",
+    "DATE": "Date :",
+    "TIME": "Heure :",
+    "EMPLOYEE": "Employé :",
+    "CANCEL": "Annuler",
+    "CANCEL_URGENT": "Annuler d'urgence",
+    "MODAL_TITLE": "Prendre un rendez-vous",
+    "MODAL_SERVICE": "Service :",
+    "MODAL_DATE": "Date :",
+    "MODAL_TIME": "Heure :",
+    "MODAL_TIME_PLACEHOLDER": "Choisissez une heure",
+    "MODAL_SUBMIT": "Réserver",
+    "MODAL_CANCEL": "Annuler",
+    "SLOT_UNAVAILABLE": "indisponible",
+    "SLOT_TOO_LATE": "trop tard"
+  },
+  "SERVICES-DASH": {
+    "Mise en plis": "Mise en plis",
+    "Coupe": "Coupe",
+    "Coupe & Mise en plis": "Coupe & Mise en plis",
+    "Soin capillaire & Lissage": "Soin capillaire & Lissage",
+    "Botox capillaire": "Botox capillaire",
+    "Coloration racine": "Coloration racine",
+    "Coloration complète": "Coloration complète",
+    "Toner": "Toner",
+    "Balayage": "Balayage",
+    "Mèches demi-tête": "Mèches demi-tête",
+    "Pose de rallonges": "Pose de rallonges"
+  },
+  "CLIENT_MENU": {
+    "DASHBOARD": "Tableau de bord",
+    "CHANGE_PASSWORD": "Changer le mot de passe",
+    "EDIT_PROFILE": "Modifier mes infos"
+  },
+  "PROFILE": {
+    "TITLE": "MES INFOS PERSO",
+    "LASTNAME": "Nom",
+    "FIRSTNAME": "Prénom",
+    "EMAIL": "Email",
+    "PHONE": "Téléphone",
+    "PLACEHOLDER_LASTNAME": "Votre nom",
+    "PLACEHOLDER_FIRSTNAME": "Votre prénom",
+    "PLACEHOLDER_EMAIL": "Votre email",
+    "PLACEHOLDER_PHONE": "Votre numéro",
+    "SAVE": "Sauvegarder",
+    "SUCCESS": "✅ Vos informations ont été mises à jour avec succès.",
+    "ERROR": "❌ Une erreur s’est produite. Veuillez réessayer."
+  },
+  "CONTACT": {
+    "TITLE": "Contactez-nous",
+    "SUBTITLE": "Notre équipe est à votre disposition pour toute question ou prise de rendez-vous.",
+    "ADDRESS_LABEL": "Adresse",
+    "PHONE_LABEL": "Téléphone",
+    "EMAIL_LABEL": "Email"
+  },
+  "HOME": {
+    "HERO": {
+      "TITLE": "INSTITUT DE COIFFURE Y&Y",
+      "SUBTITLE": "BY JASMINE",
+      "CTA": "Découvrez nos services"
+    },
+    "ABOUT": {
+      "TITLE": "À PROPOS",
+      "DESCRIPTION": "Bienvenue à l'Institut Y&Y, votre havre de beauté et de bien-être à Montréal. \n\nSitué au cœur de la ville, notre salon de coiffure pour femmes vous offre une expérience unique, alliant expertise, créativité et soins personnalisés. Que vous recherchiez une coupe moderne, une coloration éclatante ou un traitement capillaire réparateur, notre équipe de coiffeurs professionnels est là pour révéler la beauté naturelle de vos cheveux.\n\nNous utilisons des produits de qualité supérieure et des techniques à la pointe de la mode pour vous offrir un service qui respecte vos envies et vos besoins. À l'Institut Y&Y, chaque cliente est unique, et nous prenons le temps de comprendre vos souhaits pour vous offrir une coiffure qui met en valeur votre personnalité.\n\nQue ce soit pour un moment de détente ou pour un changement de look radical, nous vous garantissons un service exceptionnel et une expérience mémorable. Découvrez l’art de la coiffure avec une touche de luxe à Montréal."
+    },
+    "APPOINT": {
+      "TITLE": "Réservez en quelques clics, détendez-vous",
+      "ONLINE": {
+        "TITLE": "Rendez-vous en ligne",
+        "TEXT": "Consultez notre calendrier à tout moment pour réserver votre prochain service. Connectez-vous à votre espace client ou créez un compte pour faire une demande de rendez-vous personnalisée. Nous sommes là pour vous !",
+        "BTN": "Réservez"
+      },
+      "PHONE": {
+        "TITLE": "Rendez-vous téléphonique",
+        "TEXT": "Vous préférez échanger directement avec un professionnel pour planifier votre rendez-vous ? Notre équipe est à votre écoute par téléphone pendant nos heures d’ouverture. N’hésitez pas à nous appeler !",
+        "BTN": "Appelez-nous"
+      }
+    },
+    "BIO": {
+      "TITLE": "L’Excellence Y&Y avec La Biosthétique",
+      "DESCRIPTION": "Au salon Y&Y, nous avons fait le choix de l’excellence en vous proposant les produits La Biosthétique, référence en soins capillaires haut de gamme. Dès la première application, vos cheveux gagnent en éclat, douceur et longévité, pour une couleur éclatante qui dure.\n\nMais notre expertise va plus loin. Grâce à des soins express personnalisés, nous prenons soin de votre cuir chevelu : chute de cheveux, démangeaisons, sécheresse ou pellicules, chaque problème trouve sa solution.\n\nUn doute ? Parlez-en avec nos coiffeurs experts : ils vous guideront vers la routine idéale pour sublimer vos cheveux au quotidien."
+    },
+    "HOURS": {
+      "TITLE": "Horaires d'ouverture",
+      "CLOSED": "Fermé",
+      "BY_APPOINTMENT": "Sur Rendez-Vous",
+      "FOOTER": "Notre équipe vous accueille avec plaisir pendant nos heures d'ouverture. À bientôt chez Y&Y !"
+    }
+  },
+  "DAYS": {
+    "MONDAY": "Lundi",
+    "TUESDAY": "Mardi",
+    "WEDNESDAY": "Mercredi",
+    "THURSDAY": "Jeudi",
+    "FRIDAY": "Vendredi",
+    "SATURDAY": "Samedi",
+    "SUNDAY": "Dimanche"
+  },
+  "LOGIN": {
+    "TITLE": "Connexion",
+    "EMAIL": "Email",
+    "PHONE": "Numéro de téléphone",
+    "PLACEHOLDER_EMAIL": "Entrez votre email",
+    "PLACEHOLDER_PHONE": "Entrez votre numéro de téléphone",
+    "SUBMIT": "Se connecter",
+    "LOADING": "Chargement...",
+    "NO_ACCOUNT": "Pas encore de compte ?",
+    "REGISTER_LINK": "Rejoignez-nous !"
+  },
+  "REGISTER": {
+    "TITLE": "Créer un compte",
+    "FIRSTNAME": "Prénom",
+    "LASTNAME": "Nom",
+    "EMAIL": "Email",
+    "PHONE": "Téléphone",
+    "PLACEHOLDER_FIRSTNAME": "Entrez votre prénom",
+    "PLACEHOLDER_LASTNAME": "Entrez votre nom",
+    "PLACEHOLDER_EMAIL": "Entrez votre email",
+    "PLACEHOLDER_PHONE": "Entrez votre numéro de téléphone",
+    "ERROR_FIRSTNAME": "Le prénom est obligatoire.",
+    "ERROR_LASTNAME": "Le nom est obligatoire.",
+    "ERROR_EMAIL": "Email invalide.",
+    "ERROR_PHONE": "Numéro invalide.",
+    "SUBMIT": "S'inscrire",
+    "LOADING": "Chargement...",
+    "HAVE_ACCOUNT": "Vous avez déjà un compte ?",
+    "LOGIN_LINK": "Connectez-vous"
+  },
+  "SERVICES": {
+    "A": "À",
+    "TITLE": "Nos Services",
+    "INTRO": "nous proposons une gamme complète de soins capillaires adaptés à tous les types de cheveux et à chaque envie. Que vous souhaitiez rafraîchir votre coupe, illuminer votre couleur ou revitaliser vos cheveux en profondeur, notre équipe est à votre écoute.",
+    "HAIRCUT": {
+      "TITLE": "Coupe de cheveux",
+      "SHORT": "Cheveux courts",
+      "SHORT_DESC": "Un style frais, précis et moderne pour un entretien facile.",
+      "SHORT_PRICE": "À partir de 30$",
+      "MEDIUM": "Cheveux mi-longs",
+      "MEDIUM_DESC": "Un équilibre parfait entre volume, souplesse et mouvement.",
+      "MEDIUM_PRICE": "Entre 40$ et 55$",
+      "LONG": "Cheveux longs",
+      "LONG_DESC": "Mise en forme élégante pour sublimer vos longueurs.",
+      "LONG_PRICE": "À partir de 50$"
+    },
+    "STYLING": {
+      "TITLE": "Mise en plis",
+      "SHORT": "Cheveux courts",
+      "SHORT_DESC": "Un brushing structuré pour un effet chic et durable.",
+      "SHORT_PRICE": "À partir de 30$",
+      "MEDIUM": "Cheveux mi-longs",
+      "MEDIUM_DESC": "Volume maîtrisé pour une mise en beauté naturelle.",
+      "MEDIUM_PRICE": "À partir de 40$",
+      "LONG": "Cheveux longs",
+      "LONG_DESC": "Brillance et souplesse pour une finition impeccable.",
+      "LONG_PRICE": "À partir de 45$"
+    },
+    "COLORATION": {
+      "TITLE": "Coloration",
+      "ROOTS": "Racines",
+      "ROOTS_DESC": "Harmonisez votre repousse avec une couleur uniforme.",
+      "ROOTS_PRICE": "À partir de 65$",
+      "FULL": "Coloration complète",
+      "FULL_DESC": "Un nouveau souffle pour vos cheveux avec éclat et brillance.",
+      "FULL_PRICE": "Environ 90$",
+      "BLEACH": "Décoloration",
+      "BLEACH_DESC": "Pour un blond intense ou une base claire avant coloration.",
+      "BLEACH_PRICE": "À partir de 185$"
+    },
+    "HIGHLIGHTS": {
+      "TITLE": "Mèches",
+      "HALF": "Demi-tête",
+      "HALF_DESC": "Un éclaircissement naturel pour illuminer votre visage.",
+      "HALF_PRICE": "Entre 95$ et 150$",
+      "FULL": "Tête complète",
+      "FULL_DESC": "Un effet lumineux sur l’ensemble de la chevelure.",
+      "FULL_PRICE": "Entre 150$ et 250$"
+    },
+    "BALAYAGE": {
+      "TITLE": "Balayage",
+      "PARTIAL": "Partiel",
+      "PARTIAL_DESC": "Touches subtiles pour un effet soleil sur les longueurs.",
+      "PARTIAL_PRICE": "Entre 185$ et 250$",
+      "FULL": "Complet",
+      "FULL_DESC": "Dégradé lumineux pour un look naturel et sophistiqué.",
+      "FULL_PRICE": "Entre 250$ et 400$"
+    },
+    "TREATMENTS": {
+      "TITLE": "Traitements capillaires",
+      "MASK": "Masque Hydratant",
+      "MASK_DESC": "Hydratation intense pour des cheveux doux et brillants.",
+      "MASK_PRICE": "À partir de 25$",
+      "FUSIO": "Fusio Dose",
+      "FUSIO_DESC": "Cocktail sur-mesure pour réparer et revitaliser en profondeur.",
+      "FUSIO_PRICE": "Environ 30$",
+      "BOTOX": "Botox capillaire & Lissage",
+      "BOTOX_DESC": "Lissage, brillance et volume réunis transformation complète.",
+      "BOTOX_PRICE": "Entre 190$ et 350$"
+    },
+    "EXTENSIONS": {
+      "TITLE": "Extension de cheveux",
+      "CLIP_DESC": "Extension à clips pour ajouter longueur et volume.",
+      "COLD_DESC": "Extension à froid pour un résultat naturel et durable.",
+      "HOT_DESC": "Extension à chaud pour un effet glamour et volumineux.",
+      "PRICE": "Sur Consultation"
+    },
+    "DISCLAIMER": "* Les prix sont indicatifs et peuvent varier selon la longueur, l’épaisseur des cheveux et l’expertise du coiffeur.",
+    "BOOK_BTN": "Prendre Rendez-vous"
+  }
+}

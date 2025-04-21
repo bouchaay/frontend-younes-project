@@ -1,10 +1,25 @@
-<footer>
-    <p>&copy; 2025 AYEX. Tous droits réservés.</p>
-    <ul>
-      <li><a [routerLink]="['/mentions-legales']">Mentions Légales</a></li>
-      <li><a href="/contact">Contact</a></li>
-      <li><a [href]="instaLink" target="_blank">Instagram</a></li>
-      <li><a [href]="facebookLink" target="_blank">Facebook</a></li>
-    </ul>
-  </footer>
-  
+<footer class="site-footer">
+  <p>&copy; 2025 AYEX. Tous droits réservés.</p>
+  <ul class="footer-links">
+    <li>
+      <a [routerLink]="['/mentions-legales']" title="Mentions légales">
+        <i class="fas fa-gavel"></i>
+      </a>
+    </li>
+    <li>
+      <a href="/contact" title="Contact">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+    <li>
+      <a [href]="instaLink" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </li>
+    <li>
+      <a [href]="facebookLink" target="_blank" title="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+  </ul>
+</footer>

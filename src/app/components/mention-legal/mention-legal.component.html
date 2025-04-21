@@ -1,49 +1,51 @@
 <section class="mentions-legales">
-    <div class="container">
-      <h1>Mentions Légales</h1>
-  
-      <div class="section">
-        <h2>Éditeur du site</h2>
-        <p><strong>Nom :</strong> INSTITUT DE COIFFURE Y&Y BY JASMINE</p>
-        <p><strong>Adresse :</strong> 7674 Rue St-Hubert Montréal H1R 2N6, Canada</p>
-        <p><strong>Téléphone :</strong> +1 (514) 466 4578</p>
-        <p><strong>Courriel :</strong> {{email}}</p>
-        <p><strong>Responsable de la publication :</strong> M. Younes</p>
-      </div>
-  
-      <div class="section">
-        <h2>Hébergement</h2>
-        <p><strong>Hébergeur :</strong> Vercel Inc.</p>
-        <p>340 S Lemon Ave #4133 Walnut, CA 91789</p>
-        <p><a href="https://vercel.com" target="_blank">https://vercel.com</a></p>
-      </div>
-  
-      <div class="section">
-        <h2>Propriété intellectuelle</h2>
-        <p>Le contenu de ce site est protégé par les lois canadiennes sur le droit d’auteur et la propriété intellectuelle. Toute reproduction ou utilisation sans autorisation est interdite.</p>
-      </div>
-  
-      <div class="section">
-        <h2>Données personnelles</h2>
-        <p>Ce site peut collecter des données via des formulaires, cookies ou outils de mesure d’audience. Vous disposez d’un droit d’accès, de rectification ou de suppression en contactant <a href="mailto:privacy@salonbeaute.ca">{{email}}</a>.</p>
-      </div>
-  
-      <div class="section">
-        <h2>Cookies</h2>
-        <p>Ce site utilise des cookies à des fins statistiques et pour améliorer votre navigation. Vous pouvez les désactiver depuis votre navigateur.</p>
-      </div>
-  
-      <div class="section">
-        <h2>Responsabilité</h2>
-        <p>L’éditeur ne saurait être tenu responsable d’éventuelles erreurs, interruptions ou inexactitudes du site. L’utilisateur reste responsable de l’usage qu’il fait du contenu du site.</p>
-      </div>
-  
-      <div class="section">
-        <h2>Droit applicable</h2>
-        <p>Le site est soumis au droit canadien. Tout litige sera de la compétence exclusive des tribunaux de Montréal, Québec.</p>
-      </div>
-  
-      <p class="update-date">Dernière mise à jour : Avril 2025</p>
+  <div class="container">
+    <h1>{{ 'LEGAL.TITLE' | translate }}</h1>
+
+    <div class="section">
+      <h2>{{ 'LEGAL.EDITOR.TITLE' | translate }}</h2>
+      <p><strong>{{ 'LEGAL.EDITOR.NAME' | translate }}</strong> INSTITUT DE COIFFURE Y&Y BY JASMINE</p>
+      <p><strong>{{ 'LEGAL.EDITOR.ADDRESS' | translate }}</strong> 7674 Rue St-Hubert Montréal H1R 2N6, Canada</p>
+      <p><strong>{{ 'LEGAL.EDITOR.PHONE' | translate }}</strong> +1 (514) 466 4578</p>
+      <p><strong>{{ 'LEGAL.EDITOR.EMAIL' | translate }}</strong> {{ email }}</p>
+      <p><strong>{{ 'LEGAL.EDITOR.RESPONSIBLE' | translate }}</strong> M. Younes</p>
     </div>
-  </section>
-  
+
+    <div class="section">
+      <h2>{{ 'LEGAL.HOSTING.TITLE' | translate }}</h2>
+      <p><strong>{{ 'LEGAL.HOSTING.NAME' | translate }}</strong> Vercel Inc.</p>
+      <p>340 S Lemon Ave #4133 Walnut, CA 91789</p>
+      <p><a href="https://vercel.com" target="_blank">https://vercel.com</a></p>
+    </div>
+
+    <div class="section">
+      <h2>{{ 'LEGAL.IP.TITLE' | translate }}</h2>
+      <p>{{ 'LEGAL.IP.CONTENT' | translate }}</p>
+    </div>
+
+    <div class="section">
+      <h2>{{ 'LEGAL.DATA.TITLE' | translate }}</h2>
+      <p>
+        {{ 'LEGAL.DATA.CONTENT' | translate }}
+        <a href="mailto:privacy@salonbeaute.ca">{{ email }}</a>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>{{ 'LEGAL.COOKIES.TITLE' | translate }}</h2>
+      <p>{{ 'LEGAL.COOKIES.CONTENT' | translate }}</p>
+    </div>
+
+    <div class="section">
+      <h2>{{ 'LEGAL.RESPONSIBILITY.TITLE' | translate }}</h2>
+      <p>{{ 'LEGAL.RESPONSIBILITY.CONTENT' | translate }}</p>
+    </div>
+
+    <div class="section">
+      <h2>{{ 'LEGAL.LAW.TITLE' | translate }}</h2>
+      <p>{{ 'LEGAL.LAW.CONTENT' | translate }}</p>
+    </div>
+
+    <p class="update-date">{{ 'LEGAL.LAST_UPDATE' | translate }}</p>
+  </div>
+</section>

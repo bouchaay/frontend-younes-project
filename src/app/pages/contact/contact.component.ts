@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  imports: [TranslateModule],
 })
 export class ContactComponent {
   address: string = "7674 Rue St-Hubert Montréal H1R 2N6, Canada";
   phone: string = "+1 (514) 466 4578";
-  email: string = "younesn007@gmail.com";
+  email: string = "institutyy0@gmail.com";
   mapSrc: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) {

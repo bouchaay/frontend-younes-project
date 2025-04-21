@@ -2,15 +2,18 @@ import { Component } from '@angular/core';
 import { Service } from '../../models/service.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
-  styleUrls: ['./services.component.scss']
+  styleUrls: ['./services.component.scss'],
+  imports: [TranslateModule],
 })
 export class ServicesComponent {
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, public translate: TranslateService) {}
   services: Service[] = [
     {
       id: 1,
@@ -109,12 +112,30 @@ export class ServicesComponent {
     if (this.authService.getUser()?.role === 'client') {
       this.router.navigateByUrl('/client');
     } else if (this.authService.getUser()?.role === 'employee') {
-      alert('Un employé ne peut pas prendre de rendez-vous.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Un employé ne peut pas prendre de rendez-vous.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#b8860b',
+      });
     } else if (this.authService.getUser()?.role === 'admin') {
-      alert('Un administrateur ne peut pas prendre de rendez-vous.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Un administrateur ne peut pas prendre de rendez-vous.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#b8860b',
+      });
     } else {
       this.router.navigateByUrl('/login');
-      alert('Vous devez être connecté en tant que client pour prendre un rendez-vous.');
+      Swal.fire({
+        icon: 'info',
+        title: this.translate.instant('NAV.LOGIN_REQUIRED'),
+        text: this.translate.instant('NAV.LOGIN_REQUIRED_MSG'),
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#b8860b',
+      });
     }
   }
 }

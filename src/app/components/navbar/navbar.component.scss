@@ -97,6 +97,40 @@ nav {
   }
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-switcher {
+  margin-left: 15px;
+
+  select {
+    background-color: transparent;
+    border: 1px solid #c4b5a5;
+    padding: 4px 6px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    cursor: pointer;
+    appearance: none;
+    transition: border 0.3s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: #ffffff;
+    }
+
+    option {
+      color: black; // options dans le dropdown
+      background-color: #fff;
+    }
+  }
+}
+
+
 @media (max-width: 768px) {
   nav {
     padding: 15px 20px;

@@ -9,40 +9,51 @@
 
     <!-- Liens du menu -->
     @if (!isLoggedIn) {
-      <button class="burger" (click)="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <button class="burger" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-      <ul class="nav-links" [ngClass]="{ 'open': isMenuOpen }">
-        <li><a (click)="goToAcceuil()">Accueil</a></li>
-        <li><a (click)="goToServices()">Services</a></li>
-        <li><a (click)="priseRendezVous()">Rendez-vous</a></li>
-        <li><a (click)="goToContact()">Contact</a></li>
-        <li><a (click)="goToAbout()">À Propos</a></li>
-      </ul>
+    <ul class="nav-links" [ngClass]="{ 'open': isMenuOpen }">
+      <li><a (click)="goToAcceuil()">{{ 'NAV.HOME' | translate }}</a></li>
+      <li><a (click)="goToServices()">{{ 'NAV.SERVICES' | translate }}</a></li>
+      <li><a (click)="priseRendezVous()">{{ 'NAV.APPOINTMENT' | translate }}</a></li>
+      <li><a (click)="goToContact()">{{ 'NAV.CONTACT' | translate }}</a></li>
+      <li><a (click)="goToAbout()">{{ 'NAV.ABOUT' | translate }}</a></li>
+    </ul>
     } @else {
-      <div class="user-info">
-        @if (!isInAdminPage && isAdmin) {
-          <p><a routerLink="/admin">Accéder à l'administration</a></p>
-        } @else if (!isInClientPage && isClient) {
-          <p><a routerLink="/client">Retour à l'espace client</a></p>
-        } @else if (!isInEmployeePage && isEmployee) {
-          <p><a routerLink="/employee">Retour à l'espace employé</a></p>
-        } @else if (!isInAcceuillPage) {
-          <p><a routerLink="/">Retour à l'accueil</a></p>
-        }
-      </div>
+    <div class="user-info">
+      @if (!isInAdminPage && isAdmin) {
+      <p><a routerLink="/admin">{{ 'NAV.ADMIN' | translate }}</a></p>
+      } @else if (!isInClientPage && isClient) {
+      <p><a routerLink="/client">{{ 'NAV.CLIENT' | translate }}</a></p>
+      } @else if (!isInEmployeePage && isEmployee) {
+      <p><a routerLink="/employee">{{ 'NAV.EMPLOYEE' | translate }}</a></p>
+      } @else if (!isInAcceuillPage) {
+      <p><a routerLink="/">{{ 'NAV.BACK_HOME' | translate }}</a></p>
+      }
+    </div>
     }
 
-    <!-- Bouton de connexion / déconnexion -->
-    <div class="login-btn">
-      @if (isLoggedIn) {
-        <a (click)="logout()">Déconnexion</a>
-      } @else {
-        <a routerLink="/login">Connexion</a>
-      }
+    <!-- Langue -->
+    <div class="nav-right">
+      <div class="language-switcher">
+        <select [(ngModel)]="selectedLang" (change)="switchLang($event)">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+        </select>
+
+      </div>
+
+      <!-- Bouton de connexion/déconnexion -->
+      <div class="login-btn">
+        @if (isLoggedIn) {
+        <a (click)="logout()">{{ 'NAV.LOGOUT' | translate }}</a>
+        } @else {
+        <a routerLink="/login">{{ 'NAV.LOGIN' | translate }}</a>
+        }
+      </div>
     </div>
   </div>
 </nav>

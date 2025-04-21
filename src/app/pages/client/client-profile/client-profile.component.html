@@ -1,32 +1,32 @@
 <section class="client-profile">
-    <div class="container">
-      <h2>MES INFOS PERSO</h2>
-  
-      <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
-        <div class="form-group">
-          <label>Nom</label>
-          <input formControlName="lastName" type="text" [placeholder]="lastName || 'Votre nom'">
-        </div>
-      
-        <div class="form-group">
-          <label>Prénom</label>
-          <input formControlName="firstName" type="text" [placeholder]="firstName || 'Votre prénom'">
-        </div>
-      
-        <div class="form-group">
-          <label>Email</label>
-          <input formControlName="email" type="email" [placeholder]="currentUser?.email || 'Votre email'">
-        </div>
-      
-        <div class="form-group">
-          <label>Téléphone</label>
-          <input formControlName="phone" type="text" [placeholder]="currentUser?.phone || 'Votre numéro'">
-        </div>
-      
-        <button type="submit" class="btn-save">Sauvegarder</button>
-      </form>      
-      <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
-      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-    </div>
-  </section>
-  
+  <div class="container">
+    <h2>{{ 'PROFILE.TITLE' | translate }}</h2>
+
+    <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+      <div class="form-group">
+        <label>{{ 'PROFILE.LASTNAME' | translate }}</label>
+        <input formControlName="lastName" type="text" [placeholder]="lastName || ('PROFILE.PLACEHOLDER_LASTNAME' | translate)" />
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'PROFILE.FIRSTNAME' | translate }}</label>
+        <input formControlName="firstName" type="text" [placeholder]="firstName || ('PROFILE.PLACEHOLDER_FIRSTNAME' | translate)" />
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'PROFILE.EMAIL' | translate }}</label>
+        <input formControlName="email" type="email" [placeholder]="currentUser?.email || ('PROFILE.PLACEHOLDER_EMAIL' | translate)" />
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'PROFILE.PHONE' | translate }}</label>
+        <input formControlName="phone" type="text" [placeholder]="currentUser?.phone || ('PROFILE.PLACEHOLDER_PHONE' | translate)" />
+      </div>
+
+      <button type="submit" class="btn-save">{{ 'PROFILE.SAVE' | translate }}</button>
+    </form>
+
+    <p *ngIf="successMessage" class="success">{{ 'PROFILE.SUCCESS' | translate }}</p>
+    <p *ngIf="errorMessage" class="error">{{ 'PROFILE.ERROR' | translate }}</p>
+  </div>
+</section>

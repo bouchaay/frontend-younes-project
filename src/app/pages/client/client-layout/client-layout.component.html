@@ -9,9 +9,9 @@
         <img src="assets/images/logo-yy.png" alt="Logo" />
       </div>
       <ul>
-        <li><a (click)="goToDashboard()">Tableau de bord</a></li>
-        <!-- <li><a (click)="goToChangePassword()">Changer le mot de passe</a></li> -->
-        <li><a (click)="goToProfile()">Modifier mes infos</a></li>
+        <li><a (click)="goToDashboard()">{{ 'CLIENT_MENU.DASHBOARD' | translate }}</a></li>
+        <!-- <li><a (click)="goToChangePassword()">{{ 'CLIENT_MENU.CHANGE_PASSWORD' | translate }}</a></li> -->
+        <li><a (click)="goToProfile()">{{ 'CLIENT_MENU.EDIT_PROFILE' | translate }}</a></li>
       </ul>
     </nav>
 

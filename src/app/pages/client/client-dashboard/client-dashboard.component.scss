@@ -1,28 +1,29 @@
 .client-dashboard {
-  background-color: #f8f8f8;
-  padding: 50px 0;
+  background-color: #f9f9f9;
+  padding: 60px 20px;
   text-align: center;
+  font-family: 'Segoe UI', sans-serif;
 
   .container {
     max-width: 1000px;
     margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   }
 
   h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
+    margin-bottom: 25px;
+    color: #222;
   }
 
   h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.4rem;
+    font-weight: 600;
     margin-top: 30px;
     color: #b8860b;
     display: flex;
@@ -35,44 +36,63 @@
     display: flex;
     justify-content: center;
     overflow-x: auto;
-    padding: 10px;
+    padding: 15px 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #b8860b #e0e0e0;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #b8860b;
+      border-radius: 10px;
+    }
   }
 
   .appointments {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     padding: 10px;
   }
 
   .appointment-card {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     text-align: left;
-    min-width: 250px;
+    min-width: 260px;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
 
     h4 {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      color: #333;
     }
 
     p {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #555;
-      margin: 5px 0;
+      margin: 6px 0;
     }
   }
 
-  .cancel-btn, .urgent-cancel-btn {
+  .cancel-btn,
+  .urgent-cancel-btn {
     background: #ff4d4d;
     color: white;
-    padding: 8px 12px;
+    padding: 10px 14px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.3s;
+    font-weight: 600;
+    transition: background 0.3s ease;
 
     &:hover {
       background: #cc0000;
@@ -88,17 +108,17 @@
   }
 
   .appointment-btn-wrapper {
-    margin-top: 30px;
+    margin-top: 40px;
   }
 
   .appointment-btn {
     background: linear-gradient(135deg, #cfa75e, #b8860b);
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 14px 24px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
@@ -112,7 +132,7 @@
   .no-appointment {
     font-size: 1rem;
     color: #777;
-    margin-top: 10px;
+    margin-top: 15px;
     font-style: italic;
   }
 }
@@ -132,23 +152,24 @@
 
 .modal-content {
   background: #fff;
-  padding: 25px;
-  border-radius: 12px;
-  width: 450px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0px 12px 32px rgba(0, 0, 0, 0.2);
   text-align: center;
   position: relative;
   animation: fadeIn 0.3s ease-in-out;
 
   h3 {
-    font-size: 22px;
+    font-size: 1.3rem;
     color: #b8860b;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 18px;
 
     &::before {
       content: "📅";
@@ -160,13 +181,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 
     label {
       font-weight: bold;
       color: #333;
       display: flex;
-      align-items: center;
       justify-content: space-between;
       width: 100%;
     }
@@ -178,15 +198,14 @@
       margin-top: 5px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      font-size: 16px;
+      font-size: 1rem;
       transition: border 0.3s;
       text-align: center;
-    }
 
-    input:focus,
-    select:focus {
-      border-color: #b8860b;
-      outline: none;
+      &:focus {
+        border-color: #b8860b;
+        outline: none;
+      }
     }
   }
 
@@ -194,12 +213,12 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 20px;
 
     button {
       flex: 1;
       padding: 12px;
-      font-size: 16px;
+      font-size: 1rem;
       border: none;
       cursor: pointer;
       border-radius: 6px;
@@ -210,7 +229,7 @@
     .save-btn {
       background: #28a745;
       color: white;
-      margin-right: 8px;
+      margin-right: 10px;
 
       &:hover {
         background: #218838;
@@ -230,10 +249,10 @@
 
 .info-confirmation {
   background: #fffbe6;
-  border-left: 4px solid #e6c200;
-  padding: 15px 20px;
-  margin: 20px 0 40px;
-  border-radius: 8px;
+  border-left: 5px solid #e6c200;
+  padding: 18px 24px;
+  margin: 25px 0 40px;
+  border-radius: 10px;
   font-size: 1rem;
   font-weight: 500;
   color: #7a6600;
@@ -244,8 +263,6 @@
   }
 }
 
-
-/* 🔥 Animation d'apparition */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -256,4 +273,3 @@
     transform: scale(1);
   }
 }
-

@@ -101,8 +101,7 @@
         <div class="pagination">
             <button (click)="prevPage()" [disabled]="page === 0">⬅</button>
             <span>Page {{ page + 1 }} / {{ totalPages }}</span>
-            <button (click)="nextPage()" [disabled]="(page + 1) * itemsPerPage >= filteredAppointments.length">
-                ➡</button>
+            <button (click)="nextPage()" [disabled]="(page + 1) * itemsPerPage >= filteredAppointments.length">➡</button>
         </div>
 
         <!-- 📆 Bouton Ajouter un rendez-vous -->

@@ -8,11 +8,12 @@ import { User } from '../../../models/user.model';
 import { userInfo } from 'os';
 import { UserInfos } from '../../../models/user-infos.model';
 import Swal from 'sweetalert2';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-client-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './client-profile.component.html',
   styleUrls: ['./client-profile.component.scss']
 })

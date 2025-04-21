@@ -9,12 +9,13 @@ import { WorkingDay } from '../../../models/working-day.model';
 import { ClientDashboardService } from './client-dashboard.service';
 import { ServiceForAppointment } from '../../../models/service-for-appointment.model';
 import Swal from 'sweetalert2';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-client-dashboard',
   templateUrl: './client-dashboard.component.html',
   styleUrls: ['./client-dashboard.component.scss'],
-  imports: [FormsModule],
+  imports: [FormsModule, TranslateModule],
 })
 export class ClientDashboardComponent implements OnInit {
   appointments: Appointment[] = [];
@@ -53,7 +54,21 @@ export class ClientDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.autoLogoutIfExpired();
-    this.minDate = new Date().toISOString().split('T')[0];
+    const now = new Date();
+    const hour = now.getHours();
+
+    let minDate = new Date(); // par défaut : aujourd'hui
+
+    // Si on est avant 21h → première date possible = demain
+    if (hour < 21) {
+      minDate.setDate(minDate.getDate() + 1);
+    } else {
+      // Si on est après 21h → première date possible = après-demain
+      minDate.setDate(minDate.getDate() + 2);
+    }
+
+    this.minDate = minDate.toISOString().split('T')[0];
+
     this.getCurrentUser();
     this.loadAppointments();
     this.loadEmployees();
@@ -225,7 +240,8 @@ export class ClientDashboardComponent implements OnInit {
       !this.selectedService ||
       !this.newAppointment.date ||
       !this.newAppointment.time ||
-      this.newAppointment.date == new Date('01/01/1999')
+      this.newAppointment.date == new Date('01/01/1999') ||
+      this.newAppointment.date < new Date()
     ) {
       Swal.fire({
         icon: 'warning',
@@ -285,8 +301,16 @@ export class ClientDashboardComponent implements OnInit {
     }
   }
 
+  hasUserSelectedDate = false;
+
   onDateChange(event: Event): void {
     this.authService.autoLogoutIfExpired();
+
+    if (!this.hasUserSelectedDate) {
+      this.hasUserSelectedDate = true;
+      return;
+    }
+
     const input = event.target as HTMLInputElement;
     const value = input.value;
 
@@ -303,6 +327,7 @@ export class ClientDashboardComponent implements OnInit {
         confirmButtonText: 'OK',
       });
       this.newAppointment.date = new Date('01/01/1999');
+      this.hasUserSelectedDate = false;
       return;
     }
 
@@ -315,6 +340,7 @@ export class ClientDashboardComponent implements OnInit {
         text: '❌ Le salon est fermé ce jour-là.',
         confirmButtonText: 'OK',
       });
+      this.hasUserSelectedDate = false;
       return;
     }
 
@@ -394,4 +420,9 @@ export class ClientDashboardComponent implements OnInit {
   ): boolean {
     return s1 && s2 ? s1.label === s2.label : s1 === s2;
   }
+
+  getServiceTranslationKey(label: string): string {
+    return `SERVICES-DASH.${label}`;
+  }
+  
 }

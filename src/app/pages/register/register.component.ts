@@ -9,13 +9,14 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslateModule],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
