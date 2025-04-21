@@ -25,8 +25,8 @@ export class AuthService {
   }
 
   // 🔹 Login en envoyant les identifiants au backend
-  login(email: string, password: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password }).pipe(
+  login(email: string, phone: string): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, phone }).pipe(
       tap(response => this.handleAuthResponse(response.token))
     );
   }

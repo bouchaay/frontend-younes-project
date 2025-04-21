@@ -34,12 +34,7 @@ export class RegisterComponent {
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        phone: [
-          '',
-          [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')],
-        ],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required]],
+        phone: ['', [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]]
       },
       { validator: this.passwordsMatch }
     );
@@ -61,14 +56,14 @@ export class RegisterComponent {
     this.loading = true;
     this.errorMessage = null;
 
-    const { firstName, lastName, email, phone, password } =
+    const { firstName, lastName, email, phone } =
       this.registerForm.value;
 
     const newClient: User = {
       name: `${firstName} ${lastName}`,
       email,
       phone,
-      password,
+      password : 'password',
       role: 'client',
       status: 'actif',
       createdAt: new Date(),

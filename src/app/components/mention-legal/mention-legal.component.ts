@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class MentionLegalComponent {
 
-  email = 'contact-institut-yy@gmail.com';
+  email = 'younesn007@gmail.com';
 
 }

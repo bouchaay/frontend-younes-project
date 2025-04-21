@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private route: ActivatedRoute) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
     });
   }
 
@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.errorMessage = null;
 
-    const { email, password } = this.loginForm.value;
+    const { email, phone } = this.loginForm.value;
 
-    this.authService.login(email, password).subscribe({
+    this.authService.login(email, phone).subscribe({
       next: () => {
         this.loading = false;
         const user = this.authService.getUser();

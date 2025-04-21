@@ -3,18 +3,24 @@
     <!-- Logo à gauche -->
     <div class="logo">
       <a routerLink="/">
-        <img src="assets/images/logo-yy.png" alt="Logo du salon">
+        <img src="assets/images/logo-yy.png" alt="Logo du salon" />
       </a>
     </div>
 
     <!-- Liens du menu -->
     @if (!isLoggedIn) {
-      <ul class="nav-links">
-        <li><a routerLink="/">Accueil</a></li>
-        <li><a routerLink="/services">Services</a></li>
-        <!-- <li><a routerLink="/team">Équipe</a></li> -->
-        <li><a routerLink="/contact">Contact</a></li>
-        <li><a routerLink="/about">À Propos</a></li>
+      <button class="burger" (click)="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" [ngClass]="{ 'open': isMenuOpen }">
+        <li><a (click)="goToAcceuil()">Accueil</a></li>
+        <li><a (click)="goToServices()">Services</a></li>
+        <li><a (click)="priseRendezVous()">Rendez-vous</a></li>
+        <li><a (click)="goToContact()">Contact</a></li>
+        <li><a (click)="goToAbout()">À Propos</a></li>
       </ul>
     } @else {
       <div class="user-info">
@@ -25,17 +31,17 @@
         } @else if (!isInEmployeePage && isEmployee) {
           <p><a routerLink="/employee">Retour à l'espace employé</a></p>
         } @else if (!isInAcceuillPage) {
-          <p><a routerLink="/">Retour à l'acceuil</a></p>
+          <p><a routerLink="/">Retour à l'accueil</a></p>
         }
       </div>
     }
 
-    <!-- Bouton de connexion à droite -->
+    <!-- Bouton de connexion / déconnexion -->
     <div class="login-btn">
       @if (isLoggedIn) {
-        <a (click)="logout()">Se déconnecter</a>
+        <a (click)="logout()">Déconnexion</a>
       } @else {
-        <a routerLink="/login">Se connecter</a>
+        <a routerLink="/login">Connexion</a>
       }
     </div>
   </div>

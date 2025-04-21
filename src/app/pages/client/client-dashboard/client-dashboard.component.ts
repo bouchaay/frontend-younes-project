@@ -8,6 +8,7 @@ import { AuthService } from '../../../services/auth.service';
 import { WorkingDay } from '../../../models/working-day.model';
 import { ClientDashboardService } from './client-dashboard.service';
 import { ServiceForAppointment } from '../../../models/service-for-appointment.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-client-dashboard',
@@ -147,35 +148,52 @@ export class ClientDashboardComponent implements OnInit {
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
-  // ✅ Annuler un rendez-vous (mise à jour complète de l'objet)
   cancelAppointment(id: number | undefined) {
     this.authService.autoLogoutIfExpired();
-    if (
-      id !== undefined &&
-      confirm('Voulez-vous vraiment annuler ce rendez-vous ?')
-    ) {
-      // Récupérer l'objet complet depuis la liste des rendez-vous
-      const appointment = this.appointments.find((a) => a.id === id);
 
-      if (!appointment) {
-        console.error('Rendez-vous introuvable.');
-        return;
+    if (id === undefined) return;
+
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Voulez-vous vraiment annuler ce rendez-vous ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, annuler',
+      cancelButtonText: 'Non',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const appointment = this.appointments.find((a) => a.id === id);
+
+        if (!appointment) {
+          Swal.fire('Erreur', 'Rendez-vous introuvable.', 'error');
+          return;
+        }
+
+        const updatedAppointment = { ...appointment, status: 'Annulé' };
+
+        this.appointmentService
+          .updateAppointment(updatedAppointment)
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.loadAppointments();
+              Swal.fire(
+                'Annulé',
+                '🚫 Rendez-vous annulé avec succès.',
+                'success'
+              );
+            },
+            error: (err) => {
+              console.error('Erreur lors de l’annulation:', err);
+              Swal.fire(
+                'Erreur',
+                'Une erreur est survenue lors de l’annulation.',
+                'error'
+              );
+            },
+          });
       }
-
-      // Mettre à jour le statut à "Annulé"
-      const updatedAppointment = { ...appointment, status: 'Annulé' };
-
-      this.appointmentService
-        .updateAppointment(updatedAppointment)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.loadAppointments(); // Recharger la liste après mise à jour
-            alert('🚫 Rendez-vous annulé avec succès.');
-          },
-          error: (err) => console.error('Erreur lors de l’annulation:', err),
-        });
-    }
+    });
   }
 
   // ✅ Ouvrir le formulaire de prise de rendez-vous
@@ -209,7 +227,12 @@ export class ClientDashboardComponent implements OnInit {
       !this.newAppointment.time ||
       this.newAppointment.date == new Date('01/01/1999')
     ) {
-      alert('⚠️ Veuillez remplir tous les champs.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Erreur',
+        text: 'Veuillez remplir tous les champs.',
+        confirmButtonText: 'OK',
+      });
       return;
     }
 
@@ -224,7 +247,12 @@ export class ClientDashboardComponent implements OnInit {
         next: () => {
           this.closeAppointmentModal();
           this.loadAppointments();
-          alert('📅 Rendez-vous ajouté avec succès !');
+          Swal.fire({
+            icon: 'success',
+            title: 'Réservation réussie',
+            text: 'Votre rendez-vous a été réservé avec succès.',
+            confirmButtonText: 'OK',
+          });
         },
         error: (err) => console.error('Erreur lors de la réservation:', err),
       });
@@ -268,9 +296,12 @@ export class ClientDashboardComponent implements OnInit {
     const day = selected.getDay();
 
     if (day === 0 || day === 1) {
-      alert(
-        '❌ Le salon est fermé ce jour-là. Veuillez choisir un autre jour.'
-      );
+      Swal.fire({
+        icon: 'warning',
+        title: 'Erreur',
+        text: '❌ Le salon est fermé le dimanche et le lundi.',
+        confirmButtonText: 'OK',
+      });
       this.newAppointment.date = new Date('01/01/1999');
       return;
     }
@@ -278,7 +309,12 @@ export class ClientDashboardComponent implements OnInit {
     this.selectedDate = this.clientServiceDash.getWorkingDays()[day];
 
     if (!this.selectedDate.workingDay) {
-      alert('❌ Le salon est fermé ce jour-là.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Erreur',
+        text: '❌ Le salon est fermé ce jour-là.',
+        confirmButtonText: 'OK',
+      });
       return;
     }
 
@@ -293,39 +329,39 @@ export class ClientDashboardComponent implements OnInit {
     this.timeSlots = [];
     this.unavailableSlots = [];
     this.tooLateSlots = [];
-  
+
     const [startH, startM] = start.split(':').map(Number);
     const [endH, endM] = end.split(':').map(Number);
-  
+
     const now = new Date();
     const selectedDate = new Date(this.newAppointment.date);
     const selectedDateStr = selectedDate.toISOString().split('T')[0];
     const todayStr = now.toISOString().split('T')[0];
-  
+
     // 🔥 Durée du service sélectionné
     const duration = this.selectedService?.duration ?? 30;
-  
+
     const current = new Date();
     current.setHours(startH, startM || 0, 0, 0);
-  
+
     const endTime = new Date();
     endTime.setHours(endH, endM || 0, 0, 0);
-  
+
     while (current < endTime) {
       const hours = current.getHours().toString().padStart(2, '0');
       const minutes = current.getMinutes().toString().padStart(2, '0');
       const slot = `${hours}:${minutes}`;
-  
+
       this.timeSlots.push(slot);
-  
+
       const slotEnd = new Date(current);
       slotEnd.setMinutes(slotEnd.getMinutes() + duration);
-  
+
       const isTooLate = slotEnd > endTime;
-  
+
       const diffInMin = (current.getTime() - now.getTime()) / (1000 * 60);
       const isTooSoonToday = selectedDateStr === todayStr && diffInMin < 30;
-  
+
       // 🔒 Ajoute aux créneaux désactivés si le créneau est trop proche ou trop tard
       if (isTooSoonToday) {
         this.unavailableSlots.push(slot);
@@ -334,17 +370,15 @@ export class ClientDashboardComponent implements OnInit {
       if (isTooLate) {
         this.tooLateSlots.push(slot);
       }
-  
+
       current.setMinutes(current.getMinutes() + 30);
     }
   }
-  
 
   formatDuration(duration: number): string {
-    this.authService.autoLogoutIfExpired();
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
-  
+
     if (hours > 0 && minutes > 0) {
       return `${hours}h${minutes}`;
     } else if (hours > 0) {
@@ -354,8 +388,10 @@ export class ClientDashboardComponent implements OnInit {
     }
   }
 
-  compareServices(s1: ServiceForAppointment, s2: ServiceForAppointment): boolean {
-    this.authService.autoLogoutIfExpired();
+  compareServices(
+    s1: ServiceForAppointment,
+    s2: ServiceForAppointment
+  ): boolean {
     return s1 && s2 ? s1.label === s2.label : s1 === s2;
   }
 }

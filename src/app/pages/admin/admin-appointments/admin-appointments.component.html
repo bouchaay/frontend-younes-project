@@ -99,9 +99,9 @@
 
         <!-- 🔄 Pagination -->
         <div class="pagination">
-            <button (click)="prevPage()" [disabled]="page === 0">⬅ Précédent</button>
+            <button (click)="prevPage()" [disabled]="page === 0">⬅</button>
             <span>Page {{ page + 1 }} / {{ totalPages }}</span>
-            <button (click)="nextPage()" [disabled]="(page + 1) * itemsPerPage >= filteredAppointments.length">Suivant
+            <button (click)="nextPage()" [disabled]="(page + 1) * itemsPerPage >= filteredAppointments.length">
                 ➡</button>
         </div>
 

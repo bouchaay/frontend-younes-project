@@ -9,7 +9,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class ContactComponent {
   address: string = "7674 Rue St-Hubert Montréal H1R 2N6, Canada";
   phone: string = "+1 (514) 466 4578";
-  email: string = "contact-institut-yy@gmail.com";
+  email: string = "younesn007@gmail.com";
   mapSrc: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) {

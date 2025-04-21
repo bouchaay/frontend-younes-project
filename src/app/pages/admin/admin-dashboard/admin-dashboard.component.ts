@@ -34,7 +34,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   }
 
-  isSidebarOpen: boolean = true;
+  isSidebarOpen: boolean = false;
 
   toggleSidebar() {
     if (!this.authService.autoLogoutIfExpired()) {

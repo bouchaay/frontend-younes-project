@@ -6,6 +6,7 @@ import { UserService } from '../../../services/user.service';
 import { take } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from '../../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-users',
@@ -56,7 +57,7 @@ export class AdminUsersComponent implements OnInit {
   newClient: User = {
     name: '',
     email: '',
-    password: '',
+    password: 'password',
     phone: '',
     role: 'client',
     status: 'actif',
@@ -205,9 +206,14 @@ export class AdminUsersComponent implements OnInit {
         next: () => {
           this.editingUserId = null;
           this.loadUsers(); // Recharger les utilisateurs après mise à jour
+          Swal.fire(
+            'Succès',
+            'Statut mis à jour avec succès.',
+            'success'
+          );
         },
         error: (error) =>
-          console.error('Erreur lors de la mise à jour du statut:', error),
+          console.error('Erreur lors de la mise à jour du statut:', error), 
       });
   }
 
@@ -220,31 +226,31 @@ export class AdminUsersComponent implements OnInit {
   deleteUser(userId: number | undefined) {
     this.authService.autoLogoutIfExpired();
     if (userId != undefined) {
-      const confirmation = confirm(
-        'Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.'
-      );
-
-      if (!confirmation) {
-        return; // Annuler la suppression si l'utilisateur clique sur "Annuler"
-      }
-
-      this.userService
-        .deleteUser(userId)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.loadUsers(); // Recharger la liste après suppression
-          },
-          error: (error) => {
-            console.error(
-              'Erreur lors de la suppression de l’utilisateur :',
-              error
-            );
-            alert("Une erreur s'est produite lors de la suppression.");
-          },
-        });
+      Swal.fire({
+        title: 'Êtes-vous sûr ?',
+        text: 'Cette action est irréversible.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Oui, supprimer',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.userService.deleteUser(userId).pipe(take(1)).subscribe({
+            next: () => {
+              this.loadUsers();
+              Swal.fire('Supprimé', 'Utilisateur supprimé avec succès.', 'success');
+            },
+            error: () => {
+              Swal.fire('Erreur', 'Erreur lors de la suppression.', 'error');
+            }
+          });
+        }
+      });
     }
   }
+  
 
   // **Ouvrir la modale d'ajout**
   openAddEmployeeModal() {
@@ -253,7 +259,7 @@ export class AdminUsersComponent implements OnInit {
     this.newEmployee = {
       name: '',
       email: '',
-      password: '',
+      password: 'password',
       phone: '',
       role: 'employee',
       status: 'actif',
@@ -275,8 +281,7 @@ export class AdminUsersComponent implements OnInit {
     if (
       this.newEmployee.name &&
       this.newEmployee.email &&
-      this.newEmployee.phone &&
-      this.newEmployee.password
+      this.newEmployee.phone
     ) {
       this.userService
         .addUser(this.newEmployee)
@@ -290,7 +295,11 @@ export class AdminUsersComponent implements OnInit {
             console.error('Erreur lors de l’ajout de l’employé:', error),
         });
     } else {
-      alert('Veuillez remplir tous les champs obligatoires.');
+      Swal.fire(
+        'Erreur',
+        'Veuillez remplir tous les champs obligatoires.',
+        'error'
+      );
     }
   }
 
@@ -313,27 +322,43 @@ export class AdminUsersComponent implements OnInit {
     this.authService.autoLogoutIfExpired();
     if (user.id != undefined) {
       if (!this.newPassword[user.id] || !this.confirmPassword[user.id]) {
-        alert('Veuillez remplir tous les champs.');
+        Swal.fire(
+          'Erreur',
+          'Veuillez remplir tous les champs obligatoires.',
+          'error'
+        );
         return;
       }
 
       if (this.newPassword[user.id] !== this.confirmPassword[user.id]) {
-        alert('Les mots de passe ne correspondent pas !');
+        Swal.fire('Erreur', 'Les mots de passe ne correspondent pas.', 'error');
         return;
       }
 
       if (this.newPassword[user.id].length < 6) {
-        alert('Le mot de passe doit contenir au moins 6 caractères !');
+        Swal.fire(
+          'Erreur',
+          'Le mot de passe doit contenir au moins 6 caractères.',
+          'error'
+        );
         return;
       }
 
       const confirmation = confirm(
         'Êtes-vous sûr de vouloir chnager le mot de passe de cet utilisateur ? Cette action est irréversible.'
       );
-
-      if (!confirmation) {
-        return; // Annuler la suppression si l'utilisateur clique sur "Annuler"
-      }
+      Swal.fire({
+        title: 'Confirmation',
+        text: 'Êtes-vous sûr de vouloir changer le mot de passe ?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Oui',
+        cancelButtonText: 'Non',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          return; // Annuler la modification si l'utilisateur clique sur "Annuler"
+        }
+      });
       // Créer un objet utilisateur mis à jour avec le nouveau mot de passe
       const updatedUser: User = {
         ...user,
@@ -345,7 +370,12 @@ export class AdminUsersComponent implements OnInit {
         .pipe(take(1))
         .subscribe({
           next: () => {
-            alert('Mot de passe mis à jour avec succès !');
+            Swal.fire(
+              'Succès',
+              'Mot de passe mis à jour avec succès.',
+              'success'
+            );
+
             this.editingPasswordUserId = null; // Fermer le formulaire après mise à jour
             this.loadUsers(); // Recharger la liste des utilisateurs
           },
@@ -354,7 +384,11 @@ export class AdminUsersComponent implements OnInit {
               'Erreur lors de la mise à jour du mot de passe :',
               error
             );
-            alert('Erreur lors de la mise à jour du mot de passe.');
+            Swal.fire(
+              'Erreur',
+              'Erreur lors de la mise à jour du mot de passe.',
+              'error'
+            );
           },
         });
     }
@@ -373,7 +407,7 @@ export class AdminUsersComponent implements OnInit {
     this.newClient = {
       name: '',
       email: '',
-      password: '',
+      password: 'password',
       phone: '',
       role: 'client',
       status: 'actif',
@@ -392,25 +426,26 @@ export class AdminUsersComponent implements OnInit {
   // **Ajouter un employé**
   addClient() {
     this.authService.autoLogoutIfExpired();
-    if (
-      this.newClient.name &&
-      this.newClient.email &&
-      this.newClient.phone &&
-      this.newClient.password
-    ) {
+    const { name, email, phone } = this.newClient;
+    if (name && email && phone ) {
       this.userService
         .addUser(this.newClient)
-        .pipe(take(1)) // Prend une seule valeur et ferme l'Observable
+        .pipe(take(1))
         .subscribe({
           next: () => {
-            this.closeAddClientModal(); // Fermer le modal après ajout
-            this.loadUsers(); // Recharger la liste des utilisateurs
+            this.closeAddClientModal();
+            this.loadUsers();
+            Swal.fire('Succès', 'Client ajouté avec succès.', 'success');
           },
-          error: (error) =>
-            console.error('Erreur lors de l’ajout du client:', error),
+          error: () =>
+            Swal.fire('Erreur', "Erreur lors de l'ajout du client.", 'error'),
         });
     } else {
-      alert('Veuillez remplir tous les champs obligatoires.');
+      Swal.fire(
+        'Attention',
+        'Veuillez remplir tous les champs obligatoires.',
+        'warning'
+      );
     }
   }
 }

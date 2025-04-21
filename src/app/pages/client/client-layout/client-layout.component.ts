@@ -33,4 +33,12 @@ export class ClientLayoutComponent implements OnInit {
       this.router.navigateByUrl('/client/profile');
     }
   }
+
+  isSidebarOpen = false;
+
+  toggleSidebar() {
+    if (!this.authService.autoLogoutIfExpired()) {
+      this.isSidebarOpen = !this.isSidebarOpen;
+    }
+  }
 }

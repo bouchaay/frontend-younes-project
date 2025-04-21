@@ -7,7 +7,7 @@
                 <label for="firstName">Nom <span style="color :red;">*</span></label>
                 <input type="text" id="firstName" formControlName="firstName" placeholder="Entrez votre nom">
                 @if (f['firstName'].touched && f['firstName'].invalid) {
-                    <small class="error">Le nom est obligatoire.</small>
+                <small class="error">Le nom est obligatoire.</small>
                 }
             </div>
 
@@ -15,7 +15,7 @@
                 <label for="lastName">Prénom <span style="color :red;">*</span></label>
                 <input type="text" id="lastName" formControlName="lastName" placeholder="Entrez votre prénom">
                 @if (f['lastName'].touched && f['lastName'].invalid) {
-                    <small class="error">Le prénom est obligatoire.</small>
+                <small class="error">Le prénom est obligatoire.</small>
                 }
             </div>
 
@@ -23,7 +23,7 @@
                 <label for="email">Email <span style="color :red;">*</span></label>
                 <input type="email" id="email" formControlName="email" placeholder="Entrez votre email">
                 @if (f['email'].touched && f['email'].invalid) {
-                    <small class="error">Email invalide.</small>
+                <small class="error">Email invalide.</small>
                 }
             </div>
 
@@ -31,11 +31,11 @@
                 <label for="phone">Téléphone <span style="color :red;">*</span></label>
                 <input type="text" id="phone" formControlName="phone" placeholder="Entrez votre numéro de téléphone">
                 @if (f['phone'].touched && f['phone'].invalid) {
-                    <small class="error">Numéro invalide.</small>
+                <small class="error">Numéro invalide.</small>
                 }
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="password">Mot de passe <span style="color :red;">*</span></label>
                 <input type="password" id="password" formControlName="password" placeholder="Entrez votre mot de passe">
                 @if (f['password'].touched && f['password'].invalid) {
@@ -50,13 +50,14 @@
                     <small class="error">Les mots de passe ne correspondent pas.</small>
                 }
             </div>
+        -->
 
             <button type="submit" [disabled]="registerForm.invalid || loading">
                 @if (!loading) { S'inscrire } @else { Chargement... }
             </button>
 
             @if (errorMessage) {
-                <p class="error-message">{{ errorMessage }}</p>
+            <p class="error-message">{{ errorMessage }}</p>
             }
 
             <!-- 🔥 Ajout du lien vers la connexion -->

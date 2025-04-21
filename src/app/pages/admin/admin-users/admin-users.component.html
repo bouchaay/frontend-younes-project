@@ -76,9 +76,9 @@
                             <button class="edit-btn" (click)="editUser(user)">
                                 ⚙
                             </button>
-                            <button class="edit-btn" (click)="togglePasswordEdit(user)">
+                            <!--<button class="edit-btn" (click)="togglePasswordEdit(user)">
                                 🔑
-                            </button>
+                            </button>-->
                             <button class="delete-btn" (click)="deleteUser(user.id)">
                                 🗑
                             </button>
@@ -105,10 +105,10 @@
 
         <!-- Pagination Clients -->
         <div class="pagination">
-            <button (click)="prevPage('client')" [disabled]="clientPage === 0">⬅ Précédent</button>
+            <button (click)="prevPage('client')" [disabled]="clientPage === 0">⬅</button>
             <span>Page {{ clientPage + 1 }} / {{ totalClientPages }}</span>
             <button (click)="nextPage('client')"
-                [disabled]="(clientPage + 1) * itemsPerPage >= filteredClients.length">Suivant ➡</button>
+                [disabled]="(clientPage + 1) * itemsPerPage >= filteredClients.length">➡</button>
         </div>
 
         <!-- Bouton Ajouter un employé -->
@@ -129,9 +129,10 @@
                     <label>Téléphone :</label>
                     <input type="text" [(ngModel)]="newClient.phone" name="phone" required>
 
+                    <!--
                     <label>Mot de passe Temporaire :</label>
                     <input type="password" [(ngModel)]="newClient.password" name="password" required>
-
+                -->
                     <label>Statut :</label>
                     <select [(ngModel)]="newClient.status" name="status">
                         <option value="actif">Actif</option>
@@ -227,9 +228,9 @@
                             <button class="edit-btn" (click)="editUser(user)">
                                 ⚙
                             </button>
-                            <button class="edit-btn" (click)="togglePasswordEdit(user)">
+                            <!--<button class="edit-btn" (click)="togglePasswordEdit(user)">
                                 🔑
-                            </button>
+                            </button>-->
                             <button class="delete-btn" (click)="deleteUser(user.id)">
                                 🗑
                             </button>
@@ -257,10 +258,10 @@
 
         <!-- Pagination Employés -->
         <div class="pagination">
-            <button (click)="prevPage('employee')" [disabled]="employeePage === 0">⬅ Précédent</button>
+            <button (click)="prevPage('employee')" [disabled]="employeePage === 0">⬅</button>
             <span>Page {{ employeePage + 1 }} / {{ totalEmployeePages }}</span>
             <button (click)="nextPage('employee')"
-                [disabled]="(employeePage + 1) * itemsPerPage >= filteredEmployees.length">Suivant ➡</button>
+                [disabled]="(employeePage + 1) * itemsPerPage >= filteredEmployees.length">➡</button>
         </div>
 
         <!-- Bouton Ajouter un employé -->
@@ -281,8 +282,10 @@
                     <label>Téléphone :</label>
                     <input type="text" [(ngModel)]="newEmployee.phone" name="phone" required>
 
+                    <!--
                     <label>Mot de passe Temporaire :</label>
                     <input type="password" [(ngModel)]="newEmployee.password" name="password" required>
+                -->
 
                     <label>Statut :</label>
                     <select [(ngModel)]="newEmployee.status" name="status">

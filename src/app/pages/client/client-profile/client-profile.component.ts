@@ -7,6 +7,7 @@ import { take } from 'rxjs';
 import { User } from '../../../models/user.model';
 import { userInfo } from 'os';
 import { UserInfos } from '../../../models/user-infos.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-client-profile',
@@ -58,6 +59,12 @@ export class ClientProfileComponent implements OnInit {
   saveChanges(): void {
     this.authService.autoLogoutIfExpired();
     if (this.profileForm.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Veuillez remplir correctement tous les champs.',
+        confirmButtonText: 'OK'
+      });
       this.errorMessage = 'Veuillez remplir correctement tous les champs.';
       return;
     }
@@ -72,10 +79,22 @@ export class ClientProfileComponent implements OnInit {
     };
     this.userService.updateUserInfos(this.currentUser?.id, userInfo).pipe(take(1)).subscribe({
       next: () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Succès',
+          text: 'Informations mises à jour avec succès.',
+          confirmButtonText: 'OK'
+        });
         this.successMessage = '✅ Informations mises à jour avec succès.';
         this.errorMessage = '';
       },
       error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Erreur lors de la mise à jour.',
+          confirmButtonText: 'OK'
+        });
         this.errorMessage = '❌ Erreur lors de la mise à jour.';
         this.successMessage = '';
       }

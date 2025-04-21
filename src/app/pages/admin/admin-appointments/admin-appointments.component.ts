@@ -7,6 +7,7 @@ import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/user.model';
 import { take } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-appointments',
@@ -17,30 +18,23 @@ import { AuthService } from '../../../services/auth.service';
 export class AdminAppointmentsComponent implements OnInit {
   appointments: Appointment[] = [];
   employees: User[] = [];
-
-  // 🔍 Clients
   clients: { name: string; email: string }[] = [];
   filteredClients: { name: string; email: string }[] = [];
   clientSearch: string = '';
   clientSearchEmail: string = '';
   showClientDropdown = false;
-
   isLoading = false;
   errorMessage = '';
-
-  // **Filtres**
   statusFilter: string = 'all';
   employeeFilter: string = 'all';
   startDate: string = '';
   endDate: string = '';
-
   page: number = 0;
   itemsPerPage: number = 7;
-
   showAddAppointmentModal = false;
   newAppointment: Appointment = {
     clientName: '',
-    clientEmail:'',
+    clientEmail: '',
     employeeName: '',
     service: '',
     date: new Date(),
@@ -48,16 +42,14 @@ export class AdminAppointmentsComponent implements OnInit {
     time: '',
     status: 'En attente',
   };
-
   editingAppointmentId: number | null | undefined = null;
   editedStatus: string = '';
-
   appointmentStatuses = ['En attente', 'Confirmé', 'Terminé', 'Annulé'];
 
   constructor(
     private appointmentService: AppointmentService,
     private userService: UserService,
-    private authService: AuthService // Assurez-vous d'importer AuthService si nécessaire
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -70,53 +62,42 @@ export class AdminAppointmentsComponent implements OnInit {
   loadAppointments(): void {
     this.authService.autoLogoutIfExpired();
     this.isLoading = true;
-    this.appointmentService
-      .getAppointments()
-      .pipe(take(1))
-      .subscribe({
-        next: (appointments) => {
-          this.appointments = appointments.map((a) => ({
-            ...a,
-            date: new Date(a.date),
-            dateCreation: a.dateCreation ? new Date(a.dateCreation) : null,
-            dateAnnulation: a.dateAnnulation ? new Date(a.dateAnnulation) : null,
-            dateTerminaison: a.dateTerminaison ? new Date(a.dateTerminaison) : null,
-          }));
-          this.isLoading = false;
-        },
-        error: (err) => {
-          console.error('Erreur lors du chargement des rendez-vous:', err);
-          this.errorMessage = 'Impossible de charger les rendez-vous.';
-          this.isLoading = false;
-        },
-      });
+    this.appointmentService.getAppointments().pipe(take(1)).subscribe({
+      next: (appointments) => {
+        this.appointments = appointments.map((a) => ({
+          ...a,
+          date: new Date(a.date),
+          dateCreation: a.dateCreation ? new Date(a.dateCreation) : null,
+          dateAnnulation: a.dateAnnulation ? new Date(a.dateAnnulation) : null,
+          dateTerminaison: a.dateTerminaison ? new Date(a.dateTerminaison) : null,
+        }));
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des rendez-vous:', err);
+        this.errorMessage = 'Impossible de charger les rendez-vous.';
+        this.isLoading = false;
+      },
+    });
   }
 
   loadEmployees(): void {
     this.authService.autoLogoutIfExpired();
-    this.userService
-      .getUsersByRole('employee')
-      .pipe(take(1))
-      .subscribe({
-        next: (employees) => (this.employees = employees),
-        error: (err) =>
-          console.error('Erreur lors du chargement des employés:', err),
-      });
+    this.userService.getUsersByRole('employee').pipe(take(1)).subscribe({
+      next: (employees) => (this.employees = employees),
+      error: (err) => console.error('Erreur lors du chargement des employés:', err),
+    });
   }
 
   loadClients(): void {
     this.authService.autoLogoutIfExpired();
-    this.userService
-      .getUsersByRole('client')
-      .pipe(take(1))
-      .subscribe({
-        next: (clients) => {
-          this.clients = clients.map((c) => ({ name: c.name, email: c.email }));
-          this.filteredClients = this.clients;
-        },
-        error: (err) =>
-          console.error('Erreur lors du chargement des clients:', err),
-      });
+    this.userService.getUsersByRole('client').pipe(take(1)).subscribe({
+      next: (clients) => {
+        this.clients = clients.map((c) => ({ name: c.name, email: c.email }));
+        this.filteredClients = this.clients;
+      },
+      error: (err) => console.error('Erreur lors du chargement des clients:', err),
+    });
   }
 
   filterClients(): void {
@@ -147,11 +128,9 @@ export class AdminAppointmentsComponent implements OnInit {
     if (this.employeeFilter !== 'all') {
       filtered = filtered.filter((a) => a.employeeName === this.employeeFilter);
     }
-
     if (this.statusFilter !== 'all') {
       filtered = filtered.filter((a) => a.status === this.statusFilter);
     }
-
     if (this.startDate && this.endDate) {
       const start = new Date(this.startDate).getTime();
       const end = new Date(this.endDate).getTime();
@@ -160,7 +139,6 @@ export class AdminAppointmentsComponent implements OnInit {
         return appointmentDate >= start && appointmentDate <= end;
       });
     }
-
     return filtered;
   }
 
@@ -209,32 +187,62 @@ export class AdminAppointmentsComponent implements OnInit {
       updatedAppointment.dateTerminaison = new Date();
     }
 
-    this.appointmentService
-      .updateAppointment(updatedAppointment)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.editingAppointmentId = null;
-          this.loadAppointments();
-        },
-        error: (err) =>
-          console.error('Erreur lors de la mise à jour du statut:', err),
-      });
+    this.appointmentService.updateAppointment(updatedAppointment).pipe(take(1)).subscribe({
+      next: () => {
+        this.editingAppointmentId = null;
+        Swal.fire({
+          icon: 'success',
+          title: 'Statut mis à jour',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.loadAppointments();
+      },
+      error: (err) => {
+        console.error('Erreur lors de la mise à jour du statut:', err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Impossible de mettre à jour le statut.'
+        });
+      },
+    });
   }
 
   deleteAppointment(id: number | undefined): void {
     this.authService.autoLogoutIfExpired();
     if (id != undefined) {
-      if (confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')) {
-        this.appointmentService
-          .deleteAppointment(id)
-          .pipe(take(1))
-          .subscribe({
-            next: () => this.loadAppointments(),
-            error: (err) =>
-              console.error('Erreur lors de la suppression du rendez-vous:', err),
+      Swal.fire({
+        title: 'Supprimer ce rendez-vous ?',
+        text: 'Cette action est définitive.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Oui, supprimer',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.appointmentService.deleteAppointment(id).pipe(take(1)).subscribe({
+            next: () => {
+              this.loadAppointments();
+              Swal.fire({
+                icon: 'success',
+                title: 'Supprimé',
+                text: 'Le rendez-vous a été supprimé.'
+              });
+            },
+            error: (err) => {
+              console.error('Erreur lors de la suppression du rendez-vous:', err);
+              Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Impossible de supprimer ce rendez-vous.'
+              });
+            },
           });
-      }
+        }
+      });
     }
   }
 
@@ -249,6 +257,7 @@ export class AdminAppointmentsComponent implements OnInit {
       dateCreation: new Date(),
       time: '',
       status: 'En attente',
+      clientEmail: '',
     };
     this.clientSearch = '';
     this.filteredClients = this.clients;
@@ -264,24 +273,36 @@ export class AdminAppointmentsComponent implements OnInit {
     this.authService.autoLogoutIfExpired();
     if (
       this.newAppointment.clientName &&
-      this.newAppointment.employeeName &&
       this.newAppointment.service
     ) {
       this.newAppointment.dateCreation = new Date();
       this.newAppointment.clientEmail = this.clientSearchEmail;
-      this.appointmentService
-        .addAppointment(this.newAppointment)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.closeAddAppointmentModal();
-            this.loadAppointments();
-          },
-          error: (err) =>
-            console.error('Erreur lors de l’ajout du rendez-vous:', err),
-        });
+      this.appointmentService.addAppointment(this.newAppointment).pipe(take(1)).subscribe({
+        next: () => {
+          this.closeAddAppointmentModal();
+          this.loadAppointments();
+          Swal.fire({
+            icon: 'success',
+            title: 'Rendez-vous ajouté',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        },
+        error: (err) => {
+          console.error('Erreur lors de l’ajout du rendez-vous:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: 'Impossible d’ajouter le rendez-vous.'
+          });
+        },
+      });
     } else {
-      alert('Veuillez remplir tous les champs');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Champs requis',
+        text: 'Veuillez remplir tous les champs du formulaire.'
+      });
     }
   }
 }
