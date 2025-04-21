@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../../services/appointment.service';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { Appointment } from '../../../models/appointment.model';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/user.model';
 import { take } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
+import { EmailService } from '../../../services/email.service';
 
 @Component({
   selector: 'app-admin-appointments',
@@ -49,7 +50,8 @@ export class AdminAppointmentsComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentService,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private emailService: EmailService
   ) {}
 
   ngOnInit(): void {
@@ -62,42 +64,57 @@ export class AdminAppointmentsComponent implements OnInit {
   loadAppointments(): void {
     this.authService.autoLogoutIfExpired();
     this.isLoading = true;
-    this.appointmentService.getAppointments().pipe(take(1)).subscribe({
-      next: (appointments) => {
-        this.appointments = appointments.map((a) => ({
-          ...a,
-          date: new Date(a.date),
-          dateCreation: a.dateCreation ? new Date(a.dateCreation) : null,
-          dateAnnulation: a.dateAnnulation ? new Date(a.dateAnnulation) : null,
-          dateTerminaison: a.dateTerminaison ? new Date(a.dateTerminaison) : null,
-        }));
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Erreur lors du chargement des rendez-vous:', err);
-        this.errorMessage = 'Impossible de charger les rendez-vous.';
-        this.isLoading = false;
-      },
-    });
+    this.appointmentService
+      .getAppointments()
+      .pipe(take(1))
+      .subscribe({
+        next: (appointments) => {
+          this.appointments = appointments.map((a) => ({
+            ...a,
+            date: new Date(a.date),
+            dateCreation: a.dateCreation ? new Date(a.dateCreation) : null,
+            dateAnnulation: a.dateAnnulation
+              ? new Date(a.dateAnnulation)
+              : null,
+            dateTerminaison: a.dateTerminaison
+              ? new Date(a.dateTerminaison)
+              : null,
+          }));
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Erreur lors du chargement des rendez-vous:', err);
+          this.errorMessage = 'Impossible de charger les rendez-vous.';
+          this.isLoading = false;
+        },
+      });
   }
 
   loadEmployees(): void {
     this.authService.autoLogoutIfExpired();
-    this.userService.getUsersByRole('employee').pipe(take(1)).subscribe({
-      next: (employees) => (this.employees = employees),
-      error: (err) => console.error('Erreur lors du chargement des employés:', err),
-    });
+    this.userService
+      .getUsersByRole('employee')
+      .pipe(take(1))
+      .subscribe({
+        next: (employees) => (this.employees = employees),
+        error: (err) =>
+          console.error('Erreur lors du chargement des employés:', err),
+      });
   }
 
   loadClients(): void {
     this.authService.autoLogoutIfExpired();
-    this.userService.getUsersByRole('client').pipe(take(1)).subscribe({
-      next: (clients) => {
-        this.clients = clients.map((c) => ({ name: c.name, email: c.email }));
-        this.filteredClients = this.clients;
-      },
-      error: (err) => console.error('Erreur lors du chargement des clients:', err),
-    });
+    this.userService
+      .getUsersByRole('client')
+      .pipe(take(1))
+      .subscribe({
+        next: (clients) => {
+          this.clients = clients.map((c) => ({ name: c.name, email: c.email }));
+          this.filteredClients = this.clients;
+        },
+        error: (err) =>
+          console.error('Erreur lors du chargement des clients:', err),
+      });
   }
 
   filterClients(): void {
@@ -178,23 +195,62 @@ export class AdminAppointmentsComponent implements OnInit {
   saveAppointmentStatus(appointment: Appointment): void {
     this.authService.autoLogoutIfExpired();
     if (!appointment.id) return;
-
+  
     const updatedAppointment = { ...appointment, status: this.editedStatus };
-
+  
     if (this.editedStatus === 'Annulé') {
       updatedAppointment.dateAnnulation = new Date();
     } else if (this.editedStatus === 'Terminé') {
       updatedAppointment.dateTerminaison = new Date();
     }
-
+  
     this.appointmentService.updateAppointment(updatedAppointment).pipe(take(1)).subscribe({
       next: () => {
         this.editingAppointmentId = null;
+  
+        // ✅ Format date JJ/MM/AAAA
+        const formattedDate = formatDate(appointment.date, 'dd/MM/yyyy', 'fr');
+  
+        // ✅ Traductions pour email bilingue
+        const statusEnMap: { [key: string]: string } = {
+          'En attente': 'Pending',
+          'Confirmé': 'Confirmed',
+          'Terminé': 'Completed',
+          'Annulé': 'Cancelled',
+        };
+  
+        const serviceEnMap: { [key: string]: string } = {
+          'Mise en plis': 'Blow-dry',
+          'Coupe': 'Haircut',
+          'Coupe & Mise en plis': 'Haircut & Blow-dry',
+          'Soin capillaire & Lissage': 'Hair Treatment & Straightening',
+          'Botox capillaire': 'Hair Botox',
+          'Coloration racine': 'Root Color',
+          'Coloration complète': 'Full Hair Color',
+          'Toner': 'Toner',
+          'Balayage': 'Balayage',
+          'Mèches demi-tête': 'Half Head Highlights',
+          'Pose de rallonges': 'Hair Extensions',
+        };
+  
+        if (appointment.clientEmail && appointment.clientName && appointment.time && appointment.service) {
+          this.emailService.sendAppointmentEmail(
+            appointment.clientEmail,
+            appointment.clientName,
+            formattedDate,
+            appointment.time,
+            appointment.service,
+            serviceEnMap[appointment.service] || appointment.service,
+            this.editedStatus,
+            statusEnMap[this.editedStatus] || this.editedStatus
+          );
+        }
+  
         Swal.fire({
           icon: 'success',
           title: 'Statut mis à jour',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
         this.loadAppointments();
       },
@@ -203,7 +259,7 @@ export class AdminAppointmentsComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Erreur',
-          text: 'Impossible de mettre à jour le statut.'
+          text: 'Impossible de mettre à jour le statut.',
         });
       },
     });
@@ -220,27 +276,33 @@ export class AdminAppointmentsComponent implements OnInit {
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Oui, supprimer',
-        cancelButtonText: 'Annuler'
+        cancelButtonText: 'Annuler',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.appointmentService.deleteAppointment(id).pipe(take(1)).subscribe({
-            next: () => {
-              this.loadAppointments();
-              Swal.fire({
-                icon: 'success',
-                title: 'Supprimé',
-                text: 'Le rendez-vous a été supprimé.'
-              });
-            },
-            error: (err) => {
-              console.error('Erreur lors de la suppression du rendez-vous:', err);
-              Swal.fire({
-                icon: 'error',
-                title: 'Erreur',
-                text: 'Impossible de supprimer ce rendez-vous.'
-              });
-            },
-          });
+          this.appointmentService
+            .deleteAppointment(id)
+            .pipe(take(1))
+            .subscribe({
+              next: () => {
+                this.loadAppointments();
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Supprimé',
+                  text: 'Le rendez-vous a été supprimé.',
+                });
+              },
+              error: (err) => {
+                console.error(
+                  'Erreur lors de la suppression du rendez-vous:',
+                  err
+                );
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Erreur',
+                  text: 'Impossible de supprimer ce rendez-vous.',
+                });
+              },
+            });
         }
       });
     }
@@ -271,37 +333,37 @@ export class AdminAppointmentsComponent implements OnInit {
 
   addAppointment(): void {
     this.authService.autoLogoutIfExpired();
-    if (
-      this.newAppointment.clientName &&
-      this.newAppointment.service
-    ) {
+    if (this.newAppointment.clientName && this.newAppointment.service) {
       this.newAppointment.dateCreation = new Date();
       this.newAppointment.clientEmail = this.clientSearchEmail;
-      this.appointmentService.addAppointment(this.newAppointment).pipe(take(1)).subscribe({
-        next: () => {
-          this.closeAddAppointmentModal();
-          this.loadAppointments();
-          Swal.fire({
-            icon: 'success',
-            title: 'Rendez-vous ajouté',
-            showConfirmButton: false,
-            timer: 1500
-          });
-        },
-        error: (err) => {
-          console.error('Erreur lors de l’ajout du rendez-vous:', err);
-          Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Impossible d’ajouter le rendez-vous.'
-          });
-        },
-      });
+      this.appointmentService
+        .addAppointment(this.newAppointment)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.closeAddAppointmentModal();
+            this.loadAppointments();
+            Swal.fire({
+              icon: 'success',
+              title: 'Rendez-vous ajouté',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          },
+          error: (err) => {
+            console.error('Erreur lors de l’ajout du rendez-vous:', err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Erreur',
+              text: 'Impossible d’ajouter le rendez-vous.',
+            });
+          },
+        });
     } else {
       Swal.fire({
         icon: 'warning',
         title: 'Champs requis',
-        text: 'Veuillez remplir tous les champs du formulaire.'
+        text: 'Veuillez remplir tous les champs du formulaire.',
       });
     }
   }
